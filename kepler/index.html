@@ -5655,6 +5655,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
 <span class="sd">            FileNotFoundError: The provided GeoJSON file could not be found.</span>
 <span class="sd">            TypeError: The input geojson must be a type of str or dict.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">shutil</span>
 
         <span class="k">if</span> <span class="s2">&quot;encoding&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="n">encoding</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;encoding&quot;</span><span class="p">]</span>
@@ -5664,7 +5665,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_geojson</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">in_geojson</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">):</span>
-                    <span class="k">if</span> <span class="n">is_jupyterlite</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">common</span><span class="o">.</span><span class="n">is_jupyterlite</span><span class="p">():</span>
                         <span class="kn">import</span> <span class="nn">pyodide</span>
 
                         <span class="n">output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">in_geojson</span><span class="p">)</span>
@@ -5676,7 +5677,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
                         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
                             <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="n">in_geojson</span> <span class="o">=</span> <span class="n">github_raw_url</span><span class="p">(</span><span class="n">in_geojson</span><span class="p">)</span>
+                        <span class="n">in_geojson</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">github_raw_url</span><span class="p">(</span><span class="n">in_geojson</span><span class="p">)</span>
                         <span class="n">data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">in_geojson</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">in_geojson</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">in_geojson</span><span class="p">)</span>
@@ -5721,7 +5722,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
             <span class="n">out_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;./cache/shp&quot;</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">out_dir</span><span class="p">):</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
-            <span class="n">download_from_url</span><span class="p">(</span><span class="n">in_shp</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">common</span><span class="o">.</span><span class="n">download_from_url</span><span class="p">(</span><span class="n">in_shp</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="n">files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;*.shp&quot;</span><span class="p">)))</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">in_shp</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -5734,7 +5735,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">in_shp</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;The provided shapefile could not be found.&quot;</span><span class="p">)</span>
 
-        <span class="n">geojson</span> <span class="o">=</span> <span class="n">shp_to_geojson</span><span class="p">(</span><span class="n">in_shp</span><span class="p">)</span>
+        <span class="n">geojson</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">shp_to_geojson</span><span class="p">(</span><span class="n">in_shp</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_geojson</span><span class="p">(</span>
             <span class="n">geojson</span><span class="p">,</span>
             <span class="n">layer_name</span><span class="p">,</span>
@@ -5758,7 +5759,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">data</span> <span class="o">=</span> <span class="n">gdf_to_geojson</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">epsg</span><span class="o">=</span><span class="s2">&quot;4326&quot;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">gdf_to_geojson</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">epsg</span><span class="o">=</span><span class="s2">&quot;4326&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_geojson</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
 
@@ -5836,7 +5837,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">geojson</span> <span class="o">=</span> <span class="n">vector_to_geojson</span><span class="p">(</span>
+            <span class="n">geojson</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">vector_to_geojson</span><span class="p">(</span>
                 <span class="n">filename</span><span class="p">,</span>
                 <span class="n">epsg</span><span class="o">=</span><span class="s2">&quot;4326&quot;</span><span class="p">,</span>
                 <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
@@ -5871,7 +5872,9 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
             <span class="n">out_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;./cache&quot;</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">out_dir</span><span class="p">):</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
-            <span class="n">download_from_url</span><span class="p">(</span><span class="n">in_kml</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">unzip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">common</span><span class="o">.</span><span class="n">download_from_url</span><span class="p">(</span>
+                <span class="n">in_kml</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">unzip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span>
+            <span class="p">)</span>
             <span class="n">in_kml</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">in_kml</span><span class="p">))</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">in_kml</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;The downloaded kml file could not be found.&quot;</span><span class="p">)</span>
@@ -5904,7 +5907,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
 <span class="sd">            config (str, optional): Local path or HTTP URL to the config file. Defaults to None.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">gdf</span> <span class="o">=</span> <span class="n">read_postgis</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">con</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">gdf</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">read_postgis</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">con</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">gdf</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="s2">&quot;epsg:4326&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_gdf</span><span class="p">(</span>
             <span class="n">gdf</span><span class="p">,</span>
@@ -5936,9 +5939,13 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keplergl</span><span class="o">.</span><span class="n">KeplerGl</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">out_file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;USE_MKDOCS&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">out_file</span> <span class="o">=</span> <span class="s2">&quot;../maps/&quot;</span> <span class="o">+</span> <span class="s2">&quot;kepler_&quot;</span> <span class="o">+</span> <span class="n">random_string</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span>
+                    <span class="n">out_file</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="s2">&quot;../maps/&quot;</span> <span class="o">+</span> <span class="s2">&quot;kepler_&quot;</span> <span class="o">+</span> <span class="n">common</span><span class="o">.</span><span class="n">random_string</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span>
+                    <span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">out_file</span> <span class="o">=</span> <span class="s2">&quot;./cache/&quot;</span> <span class="o">+</span> <span class="s2">&quot;kepler_&quot;</span> <span class="o">+</span> <span class="n">random_string</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span>
+                    <span class="n">out_file</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="s2">&quot;./cache/&quot;</span> <span class="o">+</span> <span class="s2">&quot;kepler_&quot;</span> <span class="o">+</span> <span class="n">common</span><span class="o">.</span><span class="n">random_string</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span>
+                    <span class="p">)</span>
             <span class="n">out_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">out_file</span><span class="p">))</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">out_dir</span><span class="p">):</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
@@ -5946,7 +5953,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
             <span class="n">output</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Output</span><span class="p">()</span>
             <span class="k">with</span> <span class="n">output</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">save_to_html</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">out_file</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="n">read_only</span><span class="p">)</span>
-            <span class="n">display_html</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">out_file</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">)</span>
+            <span class="n">common</span><span class="o">.</span><span class="n">display_html</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">out_file</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The provided map is not a kepler.gl map.&quot;</span><span class="p">)</span>
 
@@ -5977,7 +5984,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">out_dir</span><span class="p">):</span>
                     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">random_string</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span><span class="p">)</span>
+                <span class="n">outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">common</span><span class="o">.</span><span class="n">random_string</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span><span class="p">)</span>
                 <span class="n">save</span> <span class="o">=</span> <span class="kc">False</span>
 
             <span class="n">output</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Output</span><span class="p">()</span>
@@ -6319,7 +6326,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">data</span> <span class="o">=</span> <span class="n">gdf_to_geojson</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">epsg</span><span class="o">=</span><span class="s2">&quot;4326&quot;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">gdf_to_geojson</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">epsg</span><span class="o">=</span><span class="s2">&quot;4326&quot;</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">add_geojson</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
 </code></pre></div>
@@ -6400,7 +6407,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
 <span class="sd">        config (str, optional): Local path or HTTP URL to the config file. Defaults to None.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">gdf</span> <span class="o">=</span> <span class="n">read_postgis</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">con</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">gdf</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">read_postgis</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">con</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">gdf</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="s2">&quot;epsg:4326&quot;</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">add_gdf</span><span class="p">(</span>
         <span class="n">gdf</span><span class="p">,</span>
@@ -6500,6 +6507,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
 <span class="sd">        FileNotFoundError: The provided GeoJSON file could not be found.</span>
 <span class="sd">        TypeError: The input geojson must be a type of str or dict.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">shutil</span>
 
     <span class="k">if</span> <span class="s2">&quot;encoding&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
         <span class="n">encoding</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;encoding&quot;</span><span class="p">]</span>
@@ -6509,7 +6517,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
     <span class="k">try</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_geojson</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">in_geojson</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">is_jupyterlite</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">common</span><span class="o">.</span><span class="n">is_jupyterlite</span><span class="p">():</span>
                     <span class="kn">import</span> <span class="nn">pyodide</span>
 
                     <span class="n">output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">in_geojson</span><span class="p">)</span>
@@ -6521,7 +6529,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
                     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
                         <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">in_geojson</span> <span class="o">=</span> <span class="n">github_raw_url</span><span class="p">(</span><span class="n">in_geojson</span><span class="p">)</span>
+                    <span class="n">in_geojson</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">github_raw_url</span><span class="p">(</span><span class="n">in_geojson</span><span class="p">)</span>
                     <span class="n">data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">in_geojson</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">in_geojson</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">in_geojson</span><span class="p">)</span>
@@ -6633,7 +6641,9 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
         <span class="n">out_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;./cache&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">out_dir</span><span class="p">):</span>
             <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
-        <span class="n">download_from_url</span><span class="p">(</span><span class="n">in_kml</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">unzip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">common</span><span class="o">.</span><span class="n">download_from_url</span><span class="p">(</span>
+            <span class="n">in_kml</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">unzip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
         <span class="n">in_kml</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">in_kml</span><span class="p">))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">in_kml</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;The downloaded kml file could not be found.&quot;</span><span class="p">)</span>
@@ -6742,7 +6752,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
         <span class="n">out_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;./cache/shp&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">out_dir</span><span class="p">):</span>
             <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
-        <span class="n">download_from_url</span><span class="p">(</span><span class="n">in_shp</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">common</span><span class="o">.</span><span class="n">download_from_url</span><span class="p">(</span><span class="n">in_shp</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;*.shp&quot;</span><span class="p">)))</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">in_shp</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -6755,7 +6765,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">in_shp</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;The provided shapefile could not be found.&quot;</span><span class="p">)</span>
 
-    <span class="n">geojson</span> <span class="o">=</span> <span class="n">shp_to_geojson</span><span class="p">(</span><span class="n">in_shp</span><span class="p">)</span>
+    <span class="n">geojson</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">shp_to_geojson</span><span class="p">(</span><span class="n">in_shp</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">add_geojson</span><span class="p">(</span>
         <span class="n">geojson</span><span class="p">,</span>
         <span class="n">layer_name</span><span class="p">,</span>
@@ -6851,7 +6861,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">geojson</span> <span class="o">=</span> <span class="n">vector_to_geojson</span><span class="p">(</span>
+        <span class="n">geojson</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">vector_to_geojson</span><span class="p">(</span>
             <span class="n">filename</span><span class="p">,</span>
             <span class="n">epsg</span><span class="o">=</span><span class="s2">&quot;4326&quot;</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
@@ -7091,9 +7101,13 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keplergl</span><span class="o">.</span><span class="n">KeplerGl</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">out_file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;USE_MKDOCS&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">out_file</span> <span class="o">=</span> <span class="s2">&quot;../maps/&quot;</span> <span class="o">+</span> <span class="s2">&quot;kepler_&quot;</span> <span class="o">+</span> <span class="n">random_string</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span>
+                <span class="n">out_file</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="s2">&quot;../maps/&quot;</span> <span class="o">+</span> <span class="s2">&quot;kepler_&quot;</span> <span class="o">+</span> <span class="n">common</span><span class="o">.</span><span class="n">random_string</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span>
+                <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">out_file</span> <span class="o">=</span> <span class="s2">&quot;./cache/&quot;</span> <span class="o">+</span> <span class="s2">&quot;kepler_&quot;</span> <span class="o">+</span> <span class="n">random_string</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span>
+                <span class="n">out_file</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="s2">&quot;./cache/&quot;</span> <span class="o">+</span> <span class="s2">&quot;kepler_&quot;</span> <span class="o">+</span> <span class="n">common</span><span class="o">.</span><span class="n">random_string</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span>
+                <span class="p">)</span>
         <span class="n">out_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">out_file</span><span class="p">))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">out_dir</span><span class="p">):</span>
             <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
@@ -7101,7 +7115,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
         <span class="n">output</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Output</span><span class="p">()</span>
         <span class="k">with</span> <span class="n">output</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">save_to_html</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">out_file</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="n">read_only</span><span class="p">)</span>
-        <span class="n">display_html</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">out_file</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">)</span>
+        <span class="n">common</span><span class="o">.</span><span class="n">display_html</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">out_file</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The provided map is not a kepler.gl map.&quot;</span><span class="p">)</span>
 </code></pre></div>
@@ -7180,7 +7194,7 @@ Map            (<span title="keplergl.keplergl.KeplerGl">KeplerGl</span>)
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">out_dir</span><span class="p">):</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">random_string</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span><span class="p">)</span>
+            <span class="n">outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">common</span><span class="o">.</span><span class="n">random_string</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span><span class="p">)</span>
             <span class="n">save</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="n">output</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Output</span><span class="p">()</span>

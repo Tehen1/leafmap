@@ -5541,9 +5541,9 @@ Map        </code>
             <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;height&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">height</span>
 
         <span class="k">if</span> <span class="s2">&quot;x_range&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;x_range&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">center_zoom_to_xy_range</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">zoom</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;x_range&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">center_zoom_to_xy_range</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">zoom</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="s2">&quot;y_range&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;y_range&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">center_zoom_to_xy_range</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">zoom</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;y_range&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">center_zoom_to_xy_range</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">zoom</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
         <span class="n">fig</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">figure</span> <span class="o">=</span> <span class="n">fig</span>
@@ -5655,7 +5655,7 @@ Map        </code>
 <span class="sd">                apply a rescaling to multiple bands, use something like `rescale=[&quot;164,223&quot;,&quot;130,211&quot;,&quot;99,212&quot;]`.</span>
 <span class="sd">            **kwargs: Arbitrary keyword arguments for bokeh.figure.add_tile() function, such as alpha, visible, etc.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">tile_url</span> <span class="o">=</span> <span class="n">cog_tile</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">bands</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">cog_args</span><span class="p">)</span>
+        <span class="n">tile_url</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">cog_tile</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">bands</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">cog_args</span><span class="p">)</span>
         <span class="n">tile_options</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">tile_url</span><span class="p">,</span>
             <span class="s2">&quot;attribution&quot;</span><span class="p">:</span> <span class="n">attribution</span><span class="p">,</span>
@@ -5664,7 +5664,7 @@ Map        </code>
         <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">tile_source</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">fit_bounds</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fit_bounds</span><span class="p">(</span><span class="n">cog_bounds</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fit_bounds</span><span class="p">(</span><span class="n">common</span><span class="o">.</span><span class="n">cog_bounds</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">add_raster</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -5702,9 +5702,9 @@ Map        </code>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">source</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">):</span>
-            <span class="n">source</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+            <span class="n">source</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
 
-        <span class="n">tile_layer</span><span class="p">,</span> <span class="n">client</span> <span class="o">=</span> <span class="n">get_local_tile_layer</span><span class="p">(</span>
+        <span class="n">tile_layer</span><span class="p">,</span> <span class="n">client</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_local_tile_layer</span><span class="p">(</span>
             <span class="n">source</span><span class="p">,</span>
             <span class="n">indexes</span><span class="o">=</span><span class="n">indexes</span><span class="p">,</span>
             <span class="n">colormap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span>
@@ -5757,7 +5757,7 @@ Map        </code>
 <span class="sd">            **kwargs: Arbitrary keyword arguments for bokeh.figure.add_tile() function, such as alpha, visible, etc.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">tile_url</span> <span class="o">=</span> <span class="n">stac_tile</span><span class="p">(</span>
+        <span class="n">tile_url</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">stac_tile</span><span class="p">(</span>
             <span class="n">url</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">assets</span><span class="p">,</span> <span class="n">bands</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">open_args</span>
         <span class="p">)</span>
         <span class="n">tile_options</span> <span class="o">=</span> <span class="p">{</span>
@@ -5768,7 +5768,7 @@ Map        </code>
         <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">tile_source</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">fit_bounds</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fit_bounds</span><span class="p">(</span><span class="n">stac_bounds</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fit_bounds</span><span class="p">(</span><span class="n">common</span><span class="o">.</span><span class="n">stac_bounds</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">add_gdf</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -5792,7 +5792,7 @@ Map        </code>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;gdf must be a GeoDataFrame&quot;</span><span class="p">)</span>
 
-        <span class="n">geom_type</span> <span class="o">=</span> <span class="n">gdf_geom_type</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
+        <span class="n">geom_type</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">gdf_geom_type</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
         <span class="n">gdf_new</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">to_crs</span><span class="p">)</span>
 
         <span class="n">columns</span> <span class="o">=</span> <span class="n">gdf_new</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
@@ -5845,7 +5845,7 @@ Map        </code>
         <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
         <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">):</span>
-            <span class="n">filename</span> <span class="o">=</span> <span class="n">github_raw_url</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">github_raw_url</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
         <span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span> <span class="o">**</span><span class="n">read_file_args</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_gdf</span><span class="p">(</span>
@@ -5879,7 +5879,7 @@ Map        </code>
         <span class="kn">import</span> <span class="nn">glob</span>
 
         <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">):</span>
-            <span class="n">filename</span> <span class="o">=</span> <span class="n">github_raw_url</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">github_raw_url</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.zip&quot;</span><span class="p">):</span>
             <span class="n">out_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;./cache/shp&quot;</span><span class="p">)</span>
@@ -5887,7 +5887,7 @@ Map        </code>
                 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
             <span class="n">basename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
             <span class="n">output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">basename</span><span class="p">)</span>
-            <span class="n">download_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+            <span class="n">common</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
             <span class="n">files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;*.shp&quot;</span><span class="p">)))</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">filename</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -5930,7 +5930,7 @@ Map        </code>
         <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
         <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">):</span>
-            <span class="n">filename</span> <span class="o">=</span> <span class="n">github_raw_url</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">github_raw_url</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">):</span>
             <span class="n">gdf</span> <span class="o">=</span> <span class="n">filename</span>
@@ -5960,7 +5960,7 @@ Map        </code>
 <span class="sd">            bounds (list): A list of bounds in the form of [xmin, ymin, xmax, ymax].</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">bounds</span> <span class="o">=</span> <span class="n">bounds_to_xy_range</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span>
+        <span class="n">bounds</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">bounds_to_xy_range</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">x_range</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">x_range</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
@@ -6198,7 +6198,7 @@ apply a rescaling to multiple bands, use something like <code>rescale=["164,223"
 <span class="sd">            apply a rescaling to multiple bands, use something like `rescale=[&quot;164,223&quot;,&quot;130,211&quot;,&quot;99,212&quot;]`.</span>
 <span class="sd">        **kwargs: Arbitrary keyword arguments for bokeh.figure.add_tile() function, such as alpha, visible, etc.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">tile_url</span> <span class="o">=</span> <span class="n">cog_tile</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">bands</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">cog_args</span><span class="p">)</span>
+    <span class="n">tile_url</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">cog_tile</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">bands</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">cog_args</span><span class="p">)</span>
     <span class="n">tile_options</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">tile_url</span><span class="p">,</span>
         <span class="s2">&quot;attribution&quot;</span><span class="p">:</span> <span class="n">attribution</span><span class="p">,</span>
@@ -6207,7 +6207,7 @@ apply a rescaling to multiple bands, use something like <code>rescale=["164,223"
     <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">tile_source</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">fit_bounds</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fit_bounds</span><span class="p">(</span><span class="n">cog_bounds</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fit_bounds</span><span class="p">(</span><span class="n">common</span><span class="o">.</span><span class="n">cog_bounds</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">))</span>
 </code></pre></div>
         </details>
     </div>
@@ -6292,7 +6292,7 @@ https://docs.bokeh.org/en/latest/docs/reference/plotting/figure.html#bokeh.plott
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;gdf must be a GeoDataFrame&quot;</span><span class="p">)</span>
 
-    <span class="n">geom_type</span> <span class="o">=</span> <span class="n">gdf_geom_type</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
+    <span class="n">geom_type</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">gdf_geom_type</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
     <span class="n">gdf_new</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">to_crs</span><span class="p">)</span>
 
     <span class="n">columns</span> <span class="o">=</span> <span class="n">gdf_new</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
@@ -6424,7 +6424,7 @@ https://docs.bokeh.org/en/latest/docs/reference/plotting/figure.html#bokeh.plott
     <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
     <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">):</span>
-        <span class="n">filename</span> <span class="o">=</span> <span class="n">github_raw_url</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">github_raw_url</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
     <span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span> <span class="o">**</span><span class="n">read_file_args</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">add_gdf</span><span class="p">(</span>
@@ -6575,9 +6575,9 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">source</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">):</span>
-        <span class="n">source</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
 
-    <span class="n">tile_layer</span><span class="p">,</span> <span class="n">client</span> <span class="o">=</span> <span class="n">get_local_tile_layer</span><span class="p">(</span>
+    <span class="n">tile_layer</span><span class="p">,</span> <span class="n">client</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_local_tile_layer</span><span class="p">(</span>
         <span class="n">source</span><span class="p">,</span>
         <span class="n">indexes</span><span class="o">=</span><span class="n">indexes</span><span class="p">,</span>
         <span class="n">colormap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span>
@@ -6708,7 +6708,7 @@ https://docs.bokeh.org/en/latest/docs/reference/plotting/figure.html#bokeh.plott
     <span class="kn">import</span> <span class="nn">glob</span>
 
     <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">):</span>
-        <span class="n">filename</span> <span class="o">=</span> <span class="n">github_raw_url</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">github_raw_url</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.zip&quot;</span><span class="p">):</span>
         <span class="n">out_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;./cache/shp&quot;</span><span class="p">)</span>
@@ -6716,7 +6716,7 @@ https://docs.bokeh.org/en/latest/docs/reference/plotting/figure.html#bokeh.plott
             <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
         <span class="n">basename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">basename</span><span class="p">)</span>
-        <span class="n">download_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+        <span class="n">common</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
         <span class="n">files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="s2">&quot;*.shp&quot;</span><span class="p">)))</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">filename</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -6858,7 +6858,7 @@ https://docs.bokeh.org/en/latest/docs/reference/plotting/figure.html#bokeh.plott
 <span class="sd">        **kwargs: Arbitrary keyword arguments for bokeh.figure.add_tile() function, such as alpha, visible, etc.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">tile_url</span> <span class="o">=</span> <span class="n">stac_tile</span><span class="p">(</span>
+    <span class="n">tile_url</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">stac_tile</span><span class="p">(</span>
         <span class="n">url</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">assets</span><span class="p">,</span> <span class="n">bands</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">open_args</span>
     <span class="p">)</span>
     <span class="n">tile_options</span> <span class="o">=</span> <span class="p">{</span>
@@ -6869,7 +6869,7 @@ https://docs.bokeh.org/en/latest/docs/reference/plotting/figure.html#bokeh.plott
     <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">tile_source</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">fit_bounds</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fit_bounds</span><span class="p">(</span><span class="n">stac_bounds</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fit_bounds</span><span class="p">(</span><span class="n">common</span><span class="o">.</span><span class="n">stac_bounds</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">))</span>
 </code></pre></div>
         </details>
     </div>
@@ -7037,7 +7037,7 @@ https://docs.bokeh.org/en/latest/docs/reference/plotting/figure.html#bokeh.plott
     <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
     <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">):</span>
-        <span class="n">filename</span> <span class="o">=</span> <span class="n">github_raw_url</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">github_raw_url</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">):</span>
         <span class="n">gdf</span> <span class="o">=</span> <span class="n">filename</span>
@@ -7097,7 +7097,7 @@ https://docs.bokeh.org/en/latest/docs/reference/plotting/figure.html#bokeh.plott
 <span class="sd">        bounds (list): A list of bounds in the form of [xmin, ymin, xmax, ymax].</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">bounds</span> <span class="o">=</span> <span class="n">bounds_to_xy_range</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span>
+    <span class="n">bounds</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">bounds_to_xy_range</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">x_range</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">x_range</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>

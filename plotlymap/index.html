@@ -6536,8 +6536,8 @@ Map            (<span title="plotly.graph_objs._figurewidget.FigureWidget">Figur
 <span class="sd">                and https://cogeotiff.github.io/rio-tiler/colormap/. To select a certain bands, use bidx=[1, 2, 3].</span>
 <span class="sd">                apply a rescaling to multiple bands, use something like `rescale=[&quot;164,223&quot;,&quot;130,211&quot;,&quot;99,212&quot;]`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">tile_url</span> <span class="o">=</span> <span class="n">cog_tile</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">bands</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">center</span> <span class="o">=</span> <span class="n">cog_center</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">)</span>  <span class="c1"># (lon, lat)</span>
+        <span class="n">tile_url</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">cog_tile</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">bands</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">cog_center</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">)</span>  <span class="c1"># (lon, lat)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_tile_layer</span><span class="p">(</span><span class="n">tile_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">attribution</span><span class="p">,</span> <span class="n">opacity</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_center</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lat</span><span class="o">=</span><span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
@@ -6567,10 +6567,10 @@ Map            (<span title="plotly.graph_objs._figurewidget.FigureWidget">Figur
 <span class="sd">            attribution (str, optional): The attribution to use. Defaults to &#39;&#39;.</span>
 <span class="sd">            opacity (float, optional): The opacity of the layer. Defaults to 1.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">tile_url</span> <span class="o">=</span> <span class="n">stac_tile</span><span class="p">(</span>
+        <span class="n">tile_url</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">stac_tile</span><span class="p">(</span>
             <span class="n">url</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">assets</span><span class="p">,</span> <span class="n">bands</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
         <span class="p">)</span>
-        <span class="n">center</span> <span class="o">=</span> <span class="n">stac_center</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">)</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">stac_center</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_tile_layer</span><span class="p">(</span><span class="n">tile_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">attribution</span><span class="p">,</span> <span class="n">opacity</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_center</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lat</span><span class="o">=</span><span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
@@ -6592,8 +6592,8 @@ Map            (<span title="plotly.graph_objs._figurewidget.FigureWidget">Figur
 <span class="sd">            attribution (str, optional): The attribution to use. Defaults to &#39;&#39;.</span>
 <span class="sd">            opacity (float, optional): The opacity of the layer. Defaults to 1.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">tile_url</span> <span class="o">=</span> <span class="n">mosaic_tile</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">center</span> <span class="o">=</span> <span class="n">mosaic_info</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">)[</span><span class="s2">&quot;center&quot;</span><span class="p">]</span>
+        <span class="n">tile_url</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">mosaic_tile</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">mosaic_info</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">)[</span><span class="s2">&quot;center&quot;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_tile_layer</span><span class="p">(</span><span class="n">tile_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">attribution</span><span class="p">,</span> <span class="n">opacity</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_center</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lat</span><span class="o">=</span><span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
@@ -6620,7 +6620,7 @@ Map            (<span title="plotly.graph_objs._figurewidget.FigureWidget">Figur
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">tile_url</span> <span class="o">=</span> <span class="n">planet_by_month</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">api_key</span><span class="p">,</span> <span class="n">token_name</span><span class="p">)</span>
+        <span class="n">tile_url</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">planet_by_month</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">api_key</span><span class="p">,</span> <span class="n">token_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_tile_layer</span><span class="p">(</span>
             <span class="n">tile_url</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">attribution</span><span class="o">=</span><span class="n">attribution</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="n">opacity</span>
         <span class="p">)</span>
@@ -6648,7 +6648,7 @@ Map            (<span title="plotly.graph_objs._figurewidget.FigureWidget">Figur
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="s2">&quot;q&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">quarter</span><span class="p">)</span>
-        <span class="n">tile_url</span> <span class="o">=</span> <span class="n">planet_by_quarter</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">quarter</span><span class="p">,</span> <span class="n">api_key</span><span class="p">,</span> <span class="n">token_name</span><span class="p">)</span>
+        <span class="n">tile_url</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">planet_by_quarter</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">quarter</span><span class="p">,</span> <span class="n">api_key</span><span class="p">,</span> <span class="n">token_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_tile_layer</span><span class="p">(</span>
             <span class="n">tile_url</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">attribution</span><span class="o">=</span><span class="n">attribution</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="n">opacity</span>
         <span class="p">)</span>
@@ -6691,7 +6691,7 @@ Map            (<span title="plotly.graph_objs._figurewidget.FigureWidget">Figur
 <span class="sd">            z (str, optional): Z value of the data. Defaults to None.</span>
 <span class="sd">            colorscale (str, optional): Color scale of the data. Defaults to &quot;Viridis&quot;.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">check_package</span><span class="p">(</span><span class="s2">&quot;geopandas&quot;</span><span class="p">)</span>
+        <span class="n">common</span><span class="o">.</span><span class="n">check_package</span><span class="p">(</span><span class="s2">&quot;geopandas&quot;</span><span class="p">)</span>
         <span class="kn">import</span> <span class="nn">json</span>
         <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
@@ -6783,7 +6783,7 @@ Map            (<span title="plotly.graph_objs._figurewidget.FigureWidget">Figur
         <span class="n">color_continuous_scale</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Viridis&quot;</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">check_package</span><span class="p">(</span><span class="s2">&quot;geopandas&quot;</span><span class="p">,</span> <span class="s2">&quot;https://geopandas.org&quot;</span><span class="p">)</span>
+        <span class="n">common</span><span class="o">.</span><span class="n">check_package</span><span class="p">(</span><span class="s2">&quot;geopandas&quot;</span><span class="p">,</span> <span class="s2">&quot;https://geopandas.org&quot;</span><span class="p">)</span>
         <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
         <span class="n">geojson_url</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
@@ -6830,7 +6830,7 @@ Map            (<span title="plotly.graph_objs._figurewidget.FigureWidget">Figur
 <span class="sd">            color_col (str, optional): The column name of color. Defaults to None.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">check_package</span><span class="p">(</span><span class="s2">&quot;geopandas&quot;</span><span class="p">,</span> <span class="s2">&quot;https://geopandas.org&quot;</span><span class="p">)</span>
+        <span class="n">common</span><span class="o">.</span><span class="n">check_package</span><span class="p">(</span><span class="s2">&quot;geopandas&quot;</span><span class="p">,</span> <span class="s2">&quot;https://geopandas.org&quot;</span><span class="p">)</span>
         <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -6841,7 +6841,7 @@ Map            (<span title="plotly.graph_objs._figurewidget.FigureWidget">Figur
 
         <span class="n">gdf</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">4326</span><span class="p">)</span>
         <span class="c1"># geom_type = gdf_geom_type(gdf)</span>
-        <span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span> <span class="o">=</span> <span class="n">gdf_centroid</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
+        <span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">gdf_centroid</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">label_col</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">gdf</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">label_col</span><span class="p">)</span>
@@ -7181,7 +7181,7 @@ Map            (<span title="plotly.graph_objs._figurewidget.FigureWidget">Figur
 <span class="sd">        z (str, optional): Z value of the data. Defaults to None.</span>
 <span class="sd">        colorscale (str, optional): Color scale of the data. Defaults to &quot;Viridis&quot;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">check_package</span><span class="p">(</span><span class="s2">&quot;geopandas&quot;</span><span class="p">)</span>
+    <span class="n">common</span><span class="o">.</span><span class="n">check_package</span><span class="p">(</span><span class="s2">&quot;geopandas&quot;</span><span class="p">)</span>
     <span class="kn">import</span> <span class="nn">json</span>
     <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
@@ -7302,8 +7302,8 @@ apply a rescaling to multiple bands, use something like <code>rescale=["164,223"
 <span class="sd">            and https://cogeotiff.github.io/rio-tiler/colormap/. To select a certain bands, use bidx=[1, 2, 3].</span>
 <span class="sd">            apply a rescaling to multiple bands, use something like `rescale=[&quot;164,223&quot;,&quot;130,211&quot;,&quot;99,212&quot;]`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">tile_url</span> <span class="o">=</span> <span class="n">cog_tile</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">bands</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="n">center</span> <span class="o">=</span> <span class="n">cog_center</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">)</span>  <span class="c1"># (lon, lat)</span>
+    <span class="n">tile_url</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">cog_tile</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">bands</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">cog_center</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">)</span>  <span class="c1"># (lon, lat)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">add_tile_layer</span><span class="p">(</span><span class="n">tile_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">attribution</span><span class="p">,</span> <span class="n">opacity</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">set_center</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lat</span><span class="o">=</span><span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </code></pre></div>
@@ -7436,7 +7436,7 @@ apply a rescaling to multiple bands, use something like <code>rescale=["164,223"
 <span class="sd">        color_col (str, optional): The column name of color. Defaults to None.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">check_package</span><span class="p">(</span><span class="s2">&quot;geopandas&quot;</span><span class="p">,</span> <span class="s2">&quot;https://geopandas.org&quot;</span><span class="p">)</span>
+    <span class="n">common</span><span class="o">.</span><span class="n">check_package</span><span class="p">(</span><span class="s2">&quot;geopandas&quot;</span><span class="p">,</span> <span class="s2">&quot;https://geopandas.org&quot;</span><span class="p">)</span>
     <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -7447,7 +7447,7 @@ apply a rescaling to multiple bands, use something like <code>rescale=["164,223"
 
     <span class="n">gdf</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">4326</span><span class="p">)</span>
     <span class="c1"># geom_type = gdf_geom_type(gdf)</span>
-    <span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span> <span class="o">=</span> <span class="n">gdf_centroid</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
+    <span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">gdf_centroid</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">label_col</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">gdf</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">label_col</span><span class="p">)</span>
@@ -8040,8 +8040,8 @@ apply a rescaling to multiple bands, use something like <code>rescale=["164,223"
 <span class="sd">        attribution (str, optional): The attribution to use. Defaults to &#39;&#39;.</span>
 <span class="sd">        opacity (float, optional): The opacity of the layer. Defaults to 1.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">tile_url</span> <span class="o">=</span> <span class="n">mosaic_tile</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="n">center</span> <span class="o">=</span> <span class="n">mosaic_info</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">)[</span><span class="s2">&quot;center&quot;</span><span class="p">]</span>
+    <span class="n">tile_url</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">mosaic_tile</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">mosaic_info</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">)[</span><span class="s2">&quot;center&quot;</span><span class="p">]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">add_tile_layer</span><span class="p">(</span><span class="n">tile_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">attribution</span><span class="p">,</span> <span class="n">opacity</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">set_center</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lat</span><span class="o">=</span><span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </code></pre></div>
@@ -8146,7 +8146,7 @@ apply a rescaling to multiple bands, use something like <code>rescale=["164,223"
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">month</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">tile_url</span> <span class="o">=</span> <span class="n">planet_by_month</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">api_key</span><span class="p">,</span> <span class="n">token_name</span><span class="p">)</span>
+    <span class="n">tile_url</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">planet_by_month</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">api_key</span><span class="p">,</span> <span class="n">token_name</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">add_tile_layer</span><span class="p">(</span>
         <span class="n">tile_url</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">attribution</span><span class="o">=</span><span class="n">attribution</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="n">opacity</span>
     <span class="p">)</span>
@@ -8252,7 +8252,7 @@ apply a rescaling to multiple bands, use something like <code>rescale=["164,223"
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="s2">&quot;q&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">quarter</span><span class="p">)</span>
-    <span class="n">tile_url</span> <span class="o">=</span> <span class="n">planet_by_quarter</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">quarter</span><span class="p">,</span> <span class="n">api_key</span><span class="p">,</span> <span class="n">token_name</span><span class="p">)</span>
+    <span class="n">tile_url</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">planet_by_quarter</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">quarter</span><span class="p">,</span> <span class="n">api_key</span><span class="p">,</span> <span class="n">token_name</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">add_tile_layer</span><span class="p">(</span>
         <span class="n">tile_url</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">attribution</span><span class="o">=</span><span class="n">attribution</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="n">opacity</span>
     <span class="p">)</span>
@@ -8405,10 +8405,10 @@ apply a rescaling to multiple bands, use something like <code>rescale=["164,223"
 <span class="sd">        attribution (str, optional): The attribution to use. Defaults to &#39;&#39;.</span>
 <span class="sd">        opacity (float, optional): The opacity of the layer. Defaults to 1.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">tile_url</span> <span class="o">=</span> <span class="n">stac_tile</span><span class="p">(</span>
+    <span class="n">tile_url</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">stac_tile</span><span class="p">(</span>
         <span class="n">url</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">assets</span><span class="p">,</span> <span class="n">bands</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
     <span class="p">)</span>
-    <span class="n">center</span> <span class="o">=</span> <span class="n">stac_center</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">)</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">stac_center</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">add_tile_layer</span><span class="p">(</span><span class="n">tile_url</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">attribution</span><span class="p">,</span> <span class="n">opacity</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">set_center</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lat</span><span class="o">=</span><span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">zoom</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </code></pre></div>
