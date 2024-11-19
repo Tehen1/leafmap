@@ -5615,7 +5615,7 @@ Map        </code>
             <span class="k">if</span> <span class="n">basemap</span> <span class="o">==</span> <span class="s2">&quot;OpenStreetMap&quot;</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">fig</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">xyz</span><span class="o">.</span><span class="n">OpenStreetMap</span><span class="o">.</span><span class="n">Mapnik</span><span class="p">,</span> <span class="n">retina</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                <span class="k">except</span><span class="p">:</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="kn">from</span> <span class="nn">bokeh.tile_providers</span> <span class="kn">import</span> <span class="n">get_provider</span>
 
                     <span class="n">fig</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">get_provider</span><span class="p">(</span><span class="n">xyz</span><span class="o">.</span><span class="n">OpenStreetMap</span><span class="o">.</span><span class="n">Mapnik</span><span class="p">))</span>
@@ -5690,7 +5690,7 @@ Map        </code>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">tile</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">if</span> <span class="s2">&quot;retina&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;retina&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">tile</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -6991,7 +6991,7 @@ https://docs.bokeh.org/en/latest/docs/reference/plotting/figure.html#bokeh.plott
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">tile</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
         <span class="k">if</span> <span class="s2">&quot;retina&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;retina&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">tile</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
