@@ -19846,7 +19846,7 @@ attempts to retrieve the API key using a predefined method. Defaults to None.</p
 
 
 <h2 id="leafmap.maplibregl.edit_gps_trace" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">edit_gps_trace</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">ann_column</span><span class="p">,</span> <span class="n">colormap</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">,</span> <span class="n">default_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ann_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">fig_width</span><span class="o">=</span><span class="s1">&#39;1550px&#39;</span><span class="p">,</span> <span class="n">fig_height</span><span class="o">=</span><span class="s1">&#39;300px&#39;</span><span class="p">,</span> <span class="n">time_format</span><span class="o">=</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">T%H%M%S&#39;</span><span class="p">,</span> <span class="n">stroke_color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="n">circle_size</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">webGL</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sync_plots</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">edit_gps_trace</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">ann_column</span><span class="p">,</span> <span class="n">colormap</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">,</span> <span class="n">default_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ann_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">fig_width</span><span class="o">=</span><span class="s1">&#39;1550px&#39;</span><span class="p">,</span> <span class="n">fig_height</span><span class="o">=</span><span class="s1">&#39;300px&#39;</span><span class="p">,</span> <span class="n">time_format</span><span class="o">=</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">T%H%M%S&#39;</span><span class="p">,</span> <span class="n">stroke_color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="n">circle_size</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">webGL</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sync_plots</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">column_widths</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 <a href="#leafmap.maplibregl.edit_gps_trace" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -19964,6 +19964,12 @@ The first numerical column will be used if None. Defaults to None.</p></td>
         <td><code>False</code></td>
       </tr>
       <tr>
+        <td><code>column_widths</code></td>
+        <td><code>Optional[List[int]]</code></td>
+        <td><p>The column widths for the output widget. Defaults to (9, 3).</p></td>
+        <td><code>(9, 3)</code></td>
+      </tr>
+      <tr>
         <td><code>**kwargs</code></td>
         <td></td>
         <td><p>Additional keyword arguments.</p></td>
@@ -20005,6 +20011,7 @@ The first numerical column will be used if None. Defaults to None.</p></td>
     <span class="n">webGL</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">download</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">sync_plots</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">column_widths</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -20028,6 +20035,7 @@ The first numerical column will be used if None. Defaults to None.</p></td>
 <span class="sd">        webGL (bool, optional): Whether to use WebGL (bqplot-gl) for rendering. Defaults to False.</span>
 <span class="sd">        download (bool, optional): Whether to generate links for downloading the edited GPS traces. Defaults to False.</span>
 <span class="sd">        sync_plots (bool, optional): Whether to synchronize the zoom and pan of the plots. Defaults to False.</span>
+<span class="sd">        column_widths (Optional[List[int]], optional): The column widths for the output widget. Defaults to (9, 3).</span>
 <span class="sd">        **kwargs: Additional keyword arguments.</span>
 
 <span class="sd">    Returns:</span>
@@ -20498,10 +20506,12 @@ The first numerical column will be used if None. Defaults to None.</p></td>
     <span class="n">plot_widget</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span><span class="n">fig</span><span class="p">,</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">clear_button</span><span class="p">,</span> <span class="n">toggle_button</span><span class="p">])])</span>
 
     <span class="n">left_col_layout</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
-        <span class="n">cols</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;pa-1&quot;</span>  <span class="c1"># padding for consistent spacing</span>
+        <span class="n">cols</span><span class="o">=</span><span class="n">column_widths</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="n">m</span><span class="p">],</span>
+        <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;pa-1&quot;</span><span class="p">,</span>  <span class="c1"># padding for consistent spacing</span>
     <span class="p">)</span>
     <span class="n">right_col_layout</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
-        <span class="n">cols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">cols</span><span class="o">=</span><span class="n">column_widths</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
         <span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="n">widget</span><span class="p">],</span>
         <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;pa-1&quot;</span><span class="p">,</span>  <span class="c1"># padding for consistent spacing</span>
     <span class="p">)</span>
@@ -20961,7 +20971,7 @@ webp, png, jpg. Defaults to None.</p></td>
 
 
 <h2 id="leafmap.maplibregl.open_gps_traces" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">open_gps_traces</span><span class="p">(</span><span class="n">filepaths</span><span class="p">,</span> <span class="n">dirname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">widget_width</span><span class="o">=</span><span class="s1">&#39;500px&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ann_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">layer_name</span><span class="o">=</span><span class="s1">&#39;GPS Trace&#39;</span><span class="p">,</span> <span class="n">default_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ann_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">fig_width</span><span class="o">=</span><span class="s1">&#39;1550px&#39;</span><span class="p">,</span> <span class="n">fig_height</span><span class="o">=</span><span class="s1">&#39;300px&#39;</span><span class="p">,</span> <span class="n">time_format</span><span class="o">=</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">T%H%M%S&#39;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">stroke_color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="n">circle_size</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">webGL</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sync_plots</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">add_layer_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">arrow_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">open_gps_traces</span><span class="p">(</span><span class="n">filepaths</span><span class="p">,</span> <span class="n">dirname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">widget_width</span><span class="o">=</span><span class="s1">&#39;500px&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ann_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">layer_name</span><span class="o">=</span><span class="s1">&#39;GPS Trace&#39;</span><span class="p">,</span> <span class="n">default_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ann_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">fig_width</span><span class="o">=</span><span class="s1">&#39;1550px&#39;</span><span class="p">,</span> <span class="n">fig_height</span><span class="o">=</span><span class="s1">&#39;300px&#39;</span><span class="p">,</span> <span class="n">time_format</span><span class="o">=</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">T%H%M%S&#39;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">stroke_color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="n">circle_size</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">webGL</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sync_plots</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">column_widths</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">add_layer_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">arrow_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">map_height</span><span class="o">=</span><span class="s1">&#39;600px&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 <a href="#leafmap.maplibregl.open_gps_traces" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -21091,6 +21101,30 @@ The first numerical column will be used if None. Defaults to None.</p></td>
         <td><code>False</code></td>
       </tr>
       <tr>
+        <td><code>column_widths</code></td>
+        <td><code>Optional[List[int]]</code></td>
+        <td><p>The column widths for the output widget. Defaults to (9, 3).</p></td>
+        <td><code>(9, 3)</code></td>
+      </tr>
+      <tr>
+        <td><code>add_layer_args</code></td>
+        <td><code>Dict[str, Any]</code></td>
+        <td><p>Additional keyword arguments to pass to the add_gps_trace method. Defaults to None.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>arrow_args</code></td>
+        <td><code>Dict[str, Any]</code></td>
+        <td><p>Additional keyword arguments to pass to the add_arrow method. Defaults to None.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>map_height</code></td>
+        <td><code>str</code></td>
+        <td><p>The height of the map. Defaults to "600px".</p></td>
+        <td><code>&#39;600px&#39;</code></td>
+      </tr>
+      <tr>
         <td><code>**kwargs</code></td>
         <td><code>Any</code></td>
         <td><p>Additional keyword arguments to pass to the edit_gps_trace method.</p></td>
@@ -21135,8 +21169,10 @@ The first numerical column will be used if None. Defaults to None.</p></td>
     <span class="n">webGL</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">download</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">sync_plots</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">column_widths</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
     <span class="n">add_layer_args</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">arrow_args</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">map_height</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;600px&quot;</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -21162,6 +21198,10 @@ The first numerical column will be used if None. Defaults to None.</p></td>
 <span class="sd">        webGL (bool, optional): Whether to use WebGL (bqplot-gl) for rendering. Defaults to False.</span>
 <span class="sd">        download (bool, optional): Whether to generate links for downloading the edited GPS traces. Defaults to False.</span>
 <span class="sd">        sync_plots (bool, optional): Whether to synchronize the zoom and pan of the plots. Defaults to False.</span>
+<span class="sd">        column_widths (Optional[List[int]], optional): The column widths for the output widget. Defaults to (9, 3).</span>
+<span class="sd">        add_layer_args (Dict[str, Any], optional): Additional keyword arguments to pass to the add_gps_trace method. Defaults to None.</span>
+<span class="sd">        arrow_args (Dict[str, Any], optional): Additional keyword arguments to pass to the add_arrow method. Defaults to None.</span>
+<span class="sd">        map_height (str, optional): The height of the map. Defaults to &quot;600px&quot;.</span>
 <span class="sd">        **kwargs: Additional keyword arguments to pass to the edit_gps_trace method.</span>
 
 <span class="sd">    Returns:</span>
@@ -21189,7 +21229,7 @@ The first numerical column will be used if None. Defaults to None.</p></td>
     <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">create_default_map</span><span class="p">():</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;liberty&quot;</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;liberty&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">map_height</span><span class="p">)</span>
         <span class="n">m</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="s2">&quot;Satellite&quot;</span><span class="p">)</span>
         <span class="n">m</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="s2">&quot;OpenStreetMap.Mapnik&quot;</span><span class="p">,</span> <span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">m</span><span class="o">.</span><span class="n">add_overture_buildings</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -21203,7 +21243,7 @@ The first numerical column will be used if None. Defaults to None.</p></td>
                     <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span>
 
                 <span class="k">if</span> <span class="s2">&quot;m&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-                    <span class="n">m</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span>
+                    <span class="n">m</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;m&quot;</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">m</span> <span class="o">=</span> <span class="n">create_default_map</span><span class="p">()</span>
 
@@ -21240,6 +21280,7 @@ The first numerical column will be used if None. Defaults to None.</p></td>
                     <span class="n">webGL</span><span class="p">,</span>
                     <span class="n">download</span><span class="p">,</span>
                     <span class="n">sync_plots</span><span class="p">,</span>
+                    <span class="n">column_widths</span><span class="p">,</span>
                     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
                 <span class="p">)</span>
 
