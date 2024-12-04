@@ -20473,12 +20473,12 @@ The first numerical column will be used if None. Defaults to None.</p></td>
 
         <span class="k">if</span> <span class="n">download</span><span class="p">:</span>
             <span class="n">csv_link</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">create_download_link</span><span class="p">(</span>
-                <span class="n">output_csv</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Download &quot;</span><span class="p">,</span> <span class="n">basename</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">output_csv</span><span class="p">)</span>
+                <span class="n">output_csv</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Download &quot;</span><span class="p">,</span> <span class="n">basename</span><span class="o">=</span><span class="n">output_csv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="p">)</span>
             <span class="n">geojson_link</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">create_download_link</span><span class="p">(</span>
                 <span class="n">output_geojson</span><span class="p">,</span>
                 <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Download &quot;</span><span class="p">,</span>
-                <span class="n">basename</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">output_geojson</span><span class="p">),</span>
+                <span class="n">basename</span><span class="o">=</span><span class="n">output_geojson</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
             <span class="p">)</span>
 
             <span class="k">with</span> <span class="n">output</span><span class="p">:</span>
@@ -20807,7 +20807,7 @@ webp, png, jpg. Defaults to None.</p></td>
 
 
 <h2 id="leafmap.maplibregl.open_gps_trace" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">open_gps_trace</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">open_gps_trace</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ann_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">layer_name</span><span class="o">=</span><span class="s1">&#39;GPS Trace&#39;</span><span class="p">,</span> <span class="n">default_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ann_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">fig_width</span><span class="o">=</span><span class="s1">&#39;1550px&#39;</span><span class="p">,</span> <span class="n">fig_height</span><span class="o">=</span><span class="s1">&#39;300px&#39;</span><span class="p">,</span> <span class="n">time_format</span><span class="o">=</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">T%H%M%S&#39;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">stroke_color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="n">circle_size</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">webGL</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sync_plots</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">column_widths</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">add_layer_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">arrow_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">map_height</span><span class="o">=</span><span class="s1">&#39;600px&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 <a href="#leafmap.maplibregl.open_gps_trace" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -20827,6 +20827,121 @@ webp, png, jpg. Defaults to None.</p></td>
     </tr>
   </thead>
   <tbody>
+      <tr>
+        <td><code>columns</code></td>
+        <td><code>List[str]</code></td>
+        <td><p>The columns to display in the GPS trace popup. Defaults to None.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>ann_column</code></td>
+        <td><code>str</code></td>
+        <td><p>The annotation column in the GPS trace.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>colormap</code></td>
+        <td><code>Dict[str, str]</code></td>
+        <td><p>The colormap for the GPS trace annotations.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>layer_name</code></td>
+        <td><code>str</code></td>
+        <td><p>The name of the GPS trace layer.</p></td>
+        <td><code>&#39;GPS Trace&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>default_features</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>The default features to display.
+The first numerical column will be used if None. Defaults to None.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>ann_options</code></td>
+        <td><code>Optional[List[str]]</code></td>
+        <td><p>The annotation options for the dropdown. Defaults to None.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>rows</code></td>
+        <td><code>int</code></td>
+        <td><p>The number of rows to display in the table. Defaults to 11.</p></td>
+        <td><code>11</code></td>
+      </tr>
+      <tr>
+        <td><code>fig_width</code></td>
+        <td><code>str</code></td>
+        <td><p>The width of the figure. Defaults to "1550px".</p></td>
+        <td><code>&#39;1550px&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>fig_height</code></td>
+        <td><code>str</code></td>
+        <td><p>The height of the figure. Defaults to "300px".</p></td>
+        <td><code>&#39;300px&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>time_format</code></td>
+        <td><code>str</code></td>
+        <td><p>The time format for the timestamp. Defaults to "%Y-%m-%d %H:%M:%S".</p></td>
+        <td><code>&#39;%Y%m%dT%H%M%S&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>stroke_color</code></td>
+        <td><code>str</code></td>
+        <td><p>The stroke color of the GPS trace points. Defaults to "lightgray".</p></td>
+        <td><code>&#39;lightgray&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>circle_size</code></td>
+        <td><code>int</code></td>
+        <td><p>The size of the GPS trace points. Defaults to 48.</p></td>
+        <td><code>48</code></td>
+      </tr>
+      <tr>
+        <td><code>webGL</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to use WebGL (bqplot-gl) for rendering. Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>download</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to generate links for downloading the edited GPS traces. Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>sync_plots</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to synchronize the zoom and pan of the plots. Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>column_widths</code></td>
+        <td><code>Optional[List[int]]</code></td>
+        <td><p>The column widths for the output widget. Defaults to (9, 3).</p></td>
+        <td><code>(9, 3)</code></td>
+      </tr>
+      <tr>
+        <td><code>add_layer_args</code></td>
+        <td><code>Dict[str, Any]</code></td>
+        <td><p>Additional keyword arguments to pass to the add_gps_trace method. Defaults to None.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>arrow_args</code></td>
+        <td><code>Dict[str, Any]</code></td>
+        <td><p>Additional keyword arguments to pass to the add_arrow method. Defaults to None.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>map_height</code></td>
+        <td><code>str</code></td>
+        <td><p>The height of the map. Defaults to "600px".</p></td>
+        <td><code>&#39;600px&#39;</code></td>
+      </tr>
       <tr>
         <td><code>**kwargs</code></td>
         <td><code>Any</code></td>
@@ -20852,11 +20967,53 @@ webp, png, jpg. Defaults to None.</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>leafmap/maplibregl.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">open_gps_trace</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">open_gps_trace</span><span class="p">(</span>
+    <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ann_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">colormap</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">layer_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;GPS Trace&quot;</span><span class="p">,</span>
+    <span class="n">default_features</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ann_options</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">11</span><span class="p">,</span>
+    <span class="n">fig_width</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1550px&quot;</span><span class="p">,</span>
+    <span class="n">fig_height</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;300px&quot;</span><span class="p">,</span>
+    <span class="n">time_format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">T%H%M%S&quot;</span><span class="p">,</span>
+    <span class="n">radius</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="n">stroke_color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lightgray&quot;</span><span class="p">,</span>
+    <span class="n">circle_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">48</span><span class="p">,</span>
+    <span class="n">webGL</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">download</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">sync_plots</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">column_widths</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="n">add_layer_args</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">arrow_args</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">map_height</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;600px&quot;</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Creates a widget for uploading and displaying a GPS trace on a map.</span>
 
 <span class="sd">    Args:</span>
+<span class="sd">        columns (List[str], optional): The columns to display in the GPS trace popup. Defaults to None.</span>
+<span class="sd">        ann_column (str): The annotation column in the GPS trace.</span>
+<span class="sd">        colormap (Dict[str, str]): The colormap for the GPS trace annotations.</span>
+<span class="sd">        layer_name (str): The name of the GPS trace layer.</span>
+<span class="sd">        default_features (Optional[str], optional): The default features to display.</span>
+<span class="sd">            The first numerical column will be used if None. Defaults to None.</span>
+<span class="sd">        ann_options (Optional[List[str]], optional): The annotation options for the dropdown. Defaults to None.</span>
+<span class="sd">        rows (int, optional): The number of rows to display in the table. Defaults to 11.</span>
+<span class="sd">        fig_width (str, optional): The width of the figure. Defaults to &quot;1550px&quot;.</span>
+<span class="sd">        fig_height (str, optional): The height of the figure. Defaults to &quot;300px&quot;.</span>
+<span class="sd">        time_format (str, optional): The time format for the timestamp. Defaults to &quot;%Y-%m-%d %H:%M:%S&quot;.</span>
+<span class="sd">        stroke_color (str, optional): The stroke color of the GPS trace points. Defaults to &quot;lightgray&quot;.</span>
+<span class="sd">        circle_size (int, optional): The size of the GPS trace points. Defaults to 48.</span>
+<span class="sd">        webGL (bool, optional): Whether to use WebGL (bqplot-gl) for rendering. Defaults to False.</span>
+<span class="sd">        download (bool, optional): Whether to generate links for downloading the edited GPS traces. Defaults to False.</span>
+<span class="sd">        sync_plots (bool, optional): Whether to synchronize the zoom and pan of the plots. Defaults to False.</span>
+<span class="sd">        column_widths (Optional[List[int]], optional): The column widths for the output widget. Defaults to (9, 3).</span>
+<span class="sd">        add_layer_args (Dict[str, Any], optional): Additional keyword arguments to pass to the add_gps_trace method. Defaults to None.</span>
+<span class="sd">        arrow_args (Dict[str, Any], optional): Additional keyword arguments to pass to the add_arrow method. Defaults to None.</span>
+<span class="sd">        map_height (str, optional): The height of the map. Defaults to &quot;600px&quot;.</span>
 <span class="sd">        **kwargs: Additional keyword arguments to pass to the edit_gps_trace method.</span>
 
 <span class="sd">    Returns:</span>
@@ -20864,6 +21021,13 @@ webp, png, jpg. Defaults to None.</p></td>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">main_widget</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">()</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Output</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">add_layer_args</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">add_layer_args</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">if</span> <span class="n">arrow_args</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">arrow_args</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="n">uploader</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FileUpload</span><span class="p">(</span>
         <span class="n">accept</span><span class="o">=</span><span class="s2">&quot;.csv&quot;</span><span class="p">,</span>  <span class="c1"># Accept GeoJSON files</span>
@@ -20873,7 +21037,6 @@ webp, png, jpg. Defaults to None.</p></td>
         <span class="n">button_style</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="n">output</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Output</span><span class="p">()</span>
     <span class="n">reset</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Reset&quot;</span><span class="p">,</span> <span class="n">button_style</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">on_reset_clicked</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
@@ -20882,70 +21045,66 @@ webp, png, jpg. Defaults to None.</p></td>
     <span class="n">reset</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">on_reset_clicked</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">create_default_map</span><span class="p">():</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;liberty&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;610px&quot;</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;liberty&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">map_height</span><span class="p">)</span>
         <span class="n">m</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="s2">&quot;Satellite&quot;</span><span class="p">)</span>
-        <span class="n">m</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="s2">&quot;OpenStreetMap.Mapnik&quot;</span><span class="p">,</span> <span class="n">visible</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">m</span><span class="o">.</span><span class="n">add_overture_buildings</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="s2">&quot;OpenStreetMap.Mapnik&quot;</span><span class="p">,</span> <span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">add_overture_buildings</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">m</span>
 
     <span class="k">def</span> <span class="nf">on_upload</span><span class="p">(</span><span class="n">change</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">uploader</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">content</span> <span class="o">=</span> <span class="n">uploader</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;content&quot;</span><span class="p">]</span>
-            <span class="n">filename</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">temp_file_path</span><span class="p">(</span><span class="n">extension</span><span class="o">=</span><span class="s2">&quot;.csv&quot;</span><span class="p">)</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">filepath</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">temp_file_path</span><span class="p">(</span><span class="n">extension</span><span class="o">=</span><span class="s2">&quot;.csv&quot;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                 <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
             <span class="k">with</span> <span class="n">output</span><span class="p">:</span>
                 <span class="n">output</span><span class="o">.</span><span class="n">clear_output</span><span class="p">()</span>
 
                 <span class="k">if</span> <span class="s2">&quot;m&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-                    <span class="n">m</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span>
+                    <span class="n">m</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;m&quot;</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">m</span> <span class="o">=</span> <span class="n">create_default_map</span><span class="p">()</span>
 
-                <span class="k">if</span> <span class="s2">&quot;colormap&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-                    <span class="n">colormap</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;colormap&quot;</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">colormap</span> <span class="o">=</span> <span class="p">{</span>
-                        <span class="s2">&quot;selected&quot;</span><span class="p">:</span> <span class="s2">&quot;#FFFF00&quot;</span><span class="p">,</span>  <span class="c1"># Yellow</span>
-                    <span class="p">}</span>
+                <span class="k">if</span> <span class="s2">&quot;add_line&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">add_layer_args</span><span class="p">:</span>
+                    <span class="n">add_layer_args</span><span class="p">[</span><span class="s2">&quot;add_line&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
-                <span class="k">if</span> <span class="s2">&quot;layer_name&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-                    <span class="n">layer_name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;layer_name&quot;</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">layer_name</span> <span class="o">=</span> <span class="s2">&quot;GPS Trace&quot;</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">m</span><span class="o">.</span><span class="n">add_gps_trace</span><span class="p">(</span>
+                        <span class="n">filepath</span><span class="p">,</span>
+                        <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span>
+                        <span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span>
+                        <span class="n">ann_column</span><span class="o">=</span><span class="n">ann_column</span><span class="p">,</span>
+                        <span class="n">colormap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span>
+                        <span class="n">stroke_color</span><span class="o">=</span><span class="n">stroke_color</span><span class="p">,</span>
+                        <span class="n">name</span><span class="o">=</span><span class="n">layer_name</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">add_layer_args</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="n">m</span><span class="o">.</span><span class="n">add_layer_control</span><span class="p">()</span>
 
-                <span class="k">if</span> <span class="s2">&quot;icon&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-                    <span class="n">icon</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;icon&quot;</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">icon</span> <span class="o">=</span> <span class="s2">&quot;https://assets.gishub.org/images/arrow.png&quot;</span>
-
-                <span class="k">if</span> <span class="s2">&quot;ann_column&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-                    <span class="n">ann_column</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;ann_column&quot;</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">ann_column</span> <span class="o">=</span> <span class="s2">&quot;annotation&quot;</span>
-
-                <span class="n">m</span><span class="o">.</span><span class="n">add_gps_trace</span><span class="p">(</span>
-                    <span class="n">filename</span><span class="p">,</span>
-                    <span class="n">radius</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-                    <span class="n">add_line</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                    <span class="n">color_column</span><span class="o">=</span><span class="s2">&quot;category&quot;</span><span class="p">,</span>
-                    <span class="n">name</span><span class="o">=</span><span class="n">layer_name</span><span class="p">,</span>
-                <span class="p">)</span>
-                <span class="n">m</span><span class="o">.</span><span class="n">add_legend</span><span class="p">(</span><span class="n">legend_dict</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span> <span class="n">shape_type</span><span class="o">=</span><span class="s2">&quot;circle&quot;</span><span class="p">)</span>
-                <span class="n">m</span><span class="o">.</span><span class="n">add_layer_control</span><span class="p">()</span>
-                <span class="n">m</span><span class="o">.</span><span class="n">add_draw_control</span><span class="p">(</span><span class="n">controls</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;polygon&quot;</span><span class="p">,</span> <span class="s2">&quot;point&quot;</span><span class="p">,</span> <span class="s2">&quot;trash&quot;</span><span class="p">])</span>
-
-                <span class="n">m</span><span class="o">.</span><span class="n">add_symbol</span><span class="p">(</span>
-                    <span class="n">icon</span><span class="p">,</span>
-                    <span class="n">source</span><span class="o">=</span><span class="s2">&quot;GPS Trace Line&quot;</span><span class="p">,</span>
-                    <span class="n">icon_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-                    <span class="n">symbol_placement</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span>
-                    <span class="n">minzoom</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span>
-                <span class="p">)</span>
-
-                <span class="n">edit_widget</span> <span class="o">=</span> <span class="n">edit_gps_trace</span><span class="p">(</span>
-                    <span class="n">filename</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">ann_column</span><span class="p">,</span> <span class="n">colormap</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
-                <span class="p">)</span>
+                    <span class="n">m</span><span class="o">.</span><span class="n">add_arrow</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">layer_name</span><span class="si">}</span><span class="s2"> Line&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">arrow_args</span><span class="p">)</span>
+                    <span class="n">edit_widget</span> <span class="o">=</span> <span class="n">edit_gps_trace</span><span class="p">(</span>
+                        <span class="n">filepath</span><span class="p">,</span>
+                        <span class="n">m</span><span class="p">,</span>
+                        <span class="n">ann_column</span><span class="p">,</span>
+                        <span class="n">colormap</span><span class="p">,</span>
+                        <span class="n">layer_name</span><span class="p">,</span>
+                        <span class="n">default_features</span><span class="p">,</span>
+                        <span class="n">ann_options</span><span class="p">,</span>
+                        <span class="n">rows</span><span class="p">,</span>
+                        <span class="n">fig_width</span><span class="p">,</span>
+                        <span class="n">fig_height</span><span class="p">,</span>
+                        <span class="n">time_format</span><span class="p">,</span>
+                        <span class="n">stroke_color</span><span class="p">,</span>
+                        <span class="n">circle_size</span><span class="p">,</span>
+                        <span class="n">webGL</span><span class="p">,</span>
+                        <span class="n">download</span><span class="p">,</span>
+                        <span class="n">sync_plots</span><span class="p">,</span>
+                        <span class="n">column_widths</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">edit_widget</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">()</span>
                 <span class="n">main_widget</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[</span>
                     <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">uploader</span><span class="p">,</span> <span class="n">reset</span><span class="p">]),</span>
                     <span class="n">output</span><span class="p">,</span>
@@ -21250,39 +21409,43 @@ The first numerical column will be used if None. Defaults to None.</p></td>
                 <span class="k">if</span> <span class="s2">&quot;add_line&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">add_layer_args</span><span class="p">:</span>
                     <span class="n">add_layer_args</span><span class="p">[</span><span class="s2">&quot;add_line&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
-                <span class="n">m</span><span class="o">.</span><span class="n">add_gps_trace</span><span class="p">(</span>
-                    <span class="n">filepath</span><span class="p">,</span>
-                    <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span>
-                    <span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span>
-                    <span class="n">ann_column</span><span class="o">=</span><span class="n">ann_column</span><span class="p">,</span>
-                    <span class="n">colormap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span>
-                    <span class="n">stroke_color</span><span class="o">=</span><span class="n">stroke_color</span><span class="p">,</span>
-                    <span class="n">name</span><span class="o">=</span><span class="n">layer_name</span><span class="p">,</span>
-                    <span class="o">**</span><span class="n">add_layer_args</span><span class="p">,</span>
-                <span class="p">)</span>
-                <span class="n">m</span><span class="o">.</span><span class="n">add_layer_control</span><span class="p">()</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">m</span><span class="o">.</span><span class="n">add_gps_trace</span><span class="p">(</span>
+                        <span class="n">filepath</span><span class="p">,</span>
+                        <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span>
+                        <span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span>
+                        <span class="n">ann_column</span><span class="o">=</span><span class="n">ann_column</span><span class="p">,</span>
+                        <span class="n">colormap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span>
+                        <span class="n">stroke_color</span><span class="o">=</span><span class="n">stroke_color</span><span class="p">,</span>
+                        <span class="n">name</span><span class="o">=</span><span class="n">layer_name</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">add_layer_args</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="n">m</span><span class="o">.</span><span class="n">add_layer_control</span><span class="p">()</span>
 
-                <span class="n">m</span><span class="o">.</span><span class="n">add_arrow</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">layer_name</span><span class="si">}</span><span class="s2"> Line&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">arrow_args</span><span class="p">)</span>
-                <span class="n">edit_widget</span> <span class="o">=</span> <span class="n">edit_gps_trace</span><span class="p">(</span>
-                    <span class="n">filepath</span><span class="p">,</span>
-                    <span class="n">m</span><span class="p">,</span>
-                    <span class="n">ann_column</span><span class="p">,</span>
-                    <span class="n">colormap</span><span class="p">,</span>
-                    <span class="n">layer_name</span><span class="p">,</span>
-                    <span class="n">default_features</span><span class="p">,</span>
-                    <span class="n">ann_options</span><span class="p">,</span>
-                    <span class="n">rows</span><span class="p">,</span>
-                    <span class="n">fig_width</span><span class="p">,</span>
-                    <span class="n">fig_height</span><span class="p">,</span>
-                    <span class="n">time_format</span><span class="p">,</span>
-                    <span class="n">stroke_color</span><span class="p">,</span>
-                    <span class="n">circle_size</span><span class="p">,</span>
-                    <span class="n">webGL</span><span class="p">,</span>
-                    <span class="n">download</span><span class="p">,</span>
-                    <span class="n">sync_plots</span><span class="p">,</span>
-                    <span class="n">column_widths</span><span class="p">,</span>
-                    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-                <span class="p">)</span>
+                    <span class="n">m</span><span class="o">.</span><span class="n">add_arrow</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">layer_name</span><span class="si">}</span><span class="s2"> Line&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">arrow_args</span><span class="p">)</span>
+                    <span class="n">edit_widget</span> <span class="o">=</span> <span class="n">edit_gps_trace</span><span class="p">(</span>
+                        <span class="n">filepath</span><span class="p">,</span>
+                        <span class="n">m</span><span class="p">,</span>
+                        <span class="n">ann_column</span><span class="p">,</span>
+                        <span class="n">colormap</span><span class="p">,</span>
+                        <span class="n">layer_name</span><span class="p">,</span>
+                        <span class="n">default_features</span><span class="p">,</span>
+                        <span class="n">ann_options</span><span class="p">,</span>
+                        <span class="n">rows</span><span class="p">,</span>
+                        <span class="n">fig_width</span><span class="p">,</span>
+                        <span class="n">fig_height</span><span class="p">,</span>
+                        <span class="n">time_format</span><span class="p">,</span>
+                        <span class="n">stroke_color</span><span class="p">,</span>
+                        <span class="n">circle_size</span><span class="p">,</span>
+                        <span class="n">webGL</span><span class="p">,</span>
+                        <span class="n">download</span><span class="p">,</span>
+                        <span class="n">sync_plots</span><span class="p">,</span>
+                        <span class="n">column_widths</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">edit_widget</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">()</span>
 
             <span class="n">main_widget</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">filepath_widget</span><span class="p">,</span> <span class="n">edit_widget</span><span class="p">,</span> <span class="n">output</span><span class="p">]</span>
 
