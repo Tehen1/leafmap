@@ -34357,14 +34357,14 @@ will be used. Defaults to None.</p></td>
 
 
 <h2 id="leafmap.common.merge_rasters" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">merge_rasters</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">input_pattern</span><span class="o">=</span><span class="s1">&#39;*.tif&#39;</span><span class="p">,</span> <span class="n">output_format</span><span class="o">=</span><span class="s1">&#39;GTiff&#39;</span><span class="p">,</span> <span class="n">output_nodata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_options</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;COMPRESS=DEFLATE&#39;</span><span class="p">])</span></code>
+<code class="highlight language-python"><span class="n">merge_rasters</span><span class="p">(</span><span class="n">input_dir_or_files</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">input_pattern</span><span class="o">=</span><span class="s1">&#39;*.tif&#39;</span><span class="p">,</span> <span class="n">output_format</span><span class="o">=</span><span class="s1">&#39;GTiff&#39;</span><span class="p">,</span> <span class="n">output_nodata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 <a href="#leafmap.common.merge_rasters" class="headerlink" title="Permanent link">&para;</a></h2>
 
     <div class="doc doc-contents ">
 
-      <p>Merge a directory of rasters into a single raster.</p>
+      <p>Merge a directory of rasters or a list of file paths into a single raster.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -34378,9 +34378,9 @@ will be used. Defaults to None.</p></td>
   </thead>
   <tbody>
       <tr>
-        <td><code>input_dir</code></td>
-        <td><code>str</code></td>
-        <td><p>The path to the input directory.</p></td>
+        <td><code>input_dir_or_files</code></td>
+        <td><code>Union[str, List[str]]</code></td>
+        <td><p>The path to the input directory or a list of file paths.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
@@ -34392,26 +34392,32 @@ will be used. Defaults to None.</p></td>
       <tr>
         <td><code>input_pattern</code></td>
         <td><code>str</code></td>
-        <td><p>The pattern to match the input files. Defaults to "*.tif".</p></td>
+        <td><p>The glob pattern to match input files if a directory is provided. Defaults to "*.tif".</p></td>
         <td><code>&#39;*.tif&#39;</code></td>
       </tr>
       <tr>
         <td><code>output_format</code></td>
         <td><code>str</code></td>
-        <td><p>The output format. Defaults to "GTiff".</p></td>
+        <td><p>The output raster format. Defaults to "GTiff".</p></td>
         <td><code>&#39;GTiff&#39;</code></td>
       </tr>
       <tr>
         <td><code>output_nodata</code></td>
         <td><code>float</code></td>
-        <td><p>The output nodata value. Defaults to None.</p></td>
+        <td><p>The nodata value for the output raster. Defaults to None.</p></td>
         <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>output_options</code></td>
         <td><code>list</code></td>
-        <td><p>A list of output options. Defaults to ["COMPRESS=DEFLATE"].</p></td>
-        <td><code>[&#39;COMPRESS=DEFLATE&#39;]</code></td>
+        <td><p>A list of creation options for the output raster. Defaults to ["COMPRESS=DEFLATE"].</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>**kwargs</code></td>
+        <td></td>
+        <td><p>Additional arguments to pass to gdal.WarpOptions.</p></td>
+        <td><code>{}</code></td>
       </tr>
   </tbody>
 </table>
@@ -34426,53 +34432,91 @@ will be used. Defaults to None.</p></td>
   <tbody>
       <tr>
         <td><code>ImportError</code></td>
-        <td><p>Raised if GDAL is not installed.</p></td>
+        <td><p>If GDAL is not installed.</p></td>
+      </tr>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>If no input files are found.</p></td>
       </tr>
   </tbody>
 </table>
         <details class="quote">
           <summary>Source code in <code>leafmap/common.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">merge_rasters</span><span class="p">(</span>
-    <span class="n">input_dir</span><span class="p">,</span>
-    <span class="n">output</span><span class="p">,</span>
-    <span class="n">input_pattern</span><span class="o">=</span><span class="s2">&quot;*.tif&quot;</span><span class="p">,</span>
-    <span class="n">output_format</span><span class="o">=</span><span class="s2">&quot;GTiff&quot;</span><span class="p">,</span>
-    <span class="n">output_nodata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">output_options</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;COMPRESS=DEFLATE&quot;</span><span class="p">],</span>
+    <span class="n">input_dir_or_files</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">output</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">input_pattern</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;*.tif&quot;</span><span class="p">,</span>
+    <span class="n">output_format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;GTiff&quot;</span><span class="p">,</span>
+    <span class="n">output_nodata</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">output_options</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Merge a directory of rasters into a single raster.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Merge a directory of rasters or a list of file paths into a single raster.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        input_dir (str): The path to the input directory.</span>
+<span class="sd">        input_dir_or_files (Union[str, List[str]]): The path to the input directory or a list of file paths.</span>
 <span class="sd">        output (str): The path to the output raster.</span>
-<span class="sd">        input_pattern (str, optional): The pattern to match the input files. Defaults to &quot;*.tif&quot;.</span>
-<span class="sd">        output_format (str, optional): The output format. Defaults to &quot;GTiff&quot;.</span>
-<span class="sd">        output_nodata (float, optional): The output nodata value. Defaults to None.</span>
-<span class="sd">        output_options (list, optional): A list of output options. Defaults to [&quot;COMPRESS=DEFLATE&quot;].</span>
+<span class="sd">        input_pattern (str, optional): The glob pattern to match input files if a directory is provided. Defaults to &quot;*.tif&quot;.</span>
+<span class="sd">        output_format (str, optional): The output raster format. Defaults to &quot;GTiff&quot;.</span>
+<span class="sd">        output_nodata (float, optional): The nodata value for the output raster. Defaults to None.</span>
+<span class="sd">        output_options (list, optional): A list of creation options for the output raster. Defaults to [&quot;COMPRESS=DEFLATE&quot;].</span>
+<span class="sd">        **kwargs: Additional arguments to pass to gdal.WarpOptions.</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ImportError: Raised if GDAL is not installed.</span>
+<span class="sd">        ImportError: If GDAL is not installed.</span>
+<span class="sd">        ValueError: If no input files are found.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="kn">import</span> <span class="nn">glob</span>
 
+    <span class="k">if</span> <span class="n">output_options</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">output_options</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;COMPRESS=DEFLATE&quot;</span><span class="p">]</span>
+
     <span class="k">try</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">osgeo</span> <span class="kn">import</span> <span class="n">gdal</span>
-    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">osgeo</span> <span class="kn">import</span> <span class="n">gdal</span>  <span class="c1"># Ensure GDAL is available</span>
+    <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
             <span class="s2">&quot;GDAL is required to use this function. Install it with `conda install gdal -c conda-forge`&quot;</span>
-        <span class="p">)</span>
-    <span class="c1"># Get a list of all the input files</span>
-    <span class="n">input_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="n">input_pattern</span><span class="p">))</span>
+        <span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
 
-    <span class="c1"># Merge the input files into a single output file</span>
-    <span class="n">gdal</span><span class="o">.</span><span class="n">Warp</span><span class="p">(</span>
-        <span class="n">output</span><span class="p">,</span>
-        <span class="n">input_files</span><span class="p">,</span>
+    <span class="c1"># Get a list of input files</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_dir_or_files</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>  <span class="c1"># It&#39;s a directory</span>
+        <span class="n">input_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_dir_or_files</span><span class="p">,</span> <span class="n">input_pattern</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_dir_or_files</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>  <span class="c1"># It&#39;s a list of file paths</span>
+        <span class="n">input_files</span> <span class="o">=</span> <span class="n">input_dir_or_files</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;input_dir_or_files must be a directory path (str) or a list of file paths (List[str]).&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Check if files are found</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">input_files</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;No input files found. Please check the directory or file paths provided.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Configure warp options</span>
+    <span class="n">warp_options</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">WarpOptions</span><span class="p">(</span>
         <span class="nb">format</span><span class="o">=</span><span class="n">output_format</span><span class="p">,</span>
         <span class="n">dstNodata</span><span class="o">=</span><span class="n">output_nodata</span><span class="p">,</span>
-        <span class="n">options</span><span class="o">=</span><span class="n">output_options</span><span class="p">,</span>
+        <span class="n">creationOptions</span><span class="o">=</span><span class="n">output_options</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span>
+
+    <span class="c1"># Perform the raster merge</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Merging </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">input_files</span><span class="p">)</span><span class="si">}</span><span class="s2"> rasters into &#39;</span><span class="si">{</span><span class="n">output</span><span class="si">}</span><span class="s2">&#39;...&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Warp</span><span class="p">(</span>
+        <span class="n">destNameOrDestDS</span><span class="o">=</span><span class="n">output</span><span class="p">,</span>
+        <span class="n">srcDSOrSrcDSTab</span><span class="o">=</span><span class="n">input_files</span><span class="p">,</span>
+        <span class="n">options</span><span class="o">=</span><span class="n">warp_options</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Check for success</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+            <span class="s2">&quot;Raster merge failed. Please check your inputs and parameters.&quot;</span>
+        <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Raster merge completed successfully: </span><span class="si">{</span><span class="n">output</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
