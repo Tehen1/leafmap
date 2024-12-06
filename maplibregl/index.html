@@ -10223,7 +10223,12 @@ Map            (<span title="maplibre.ipywidget.MapWidget">MapWidget</span>)
                 <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File not found: </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">tmp_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">data</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_tmp.csv&quot;</span>
             <span class="n">gdf</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+            <span class="c1"># If the temporary file exists, read the annotations from it</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">tmp_file</span><span class="p">):</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">tmp_file</span><span class="p">)</span>
+                <span class="n">gdf</span><span class="p">[</span><span class="n">ann_column</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">ann_column</span><span class="p">]</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">):</span>
             <span class="n">gdf</span> <span class="o">=</span> <span class="n">data</span>
         <span class="k">else</span><span class="p">:</span>
@@ -13568,7 +13573,12 @@ which assumes the y coordinates are in the "latitude", "lat", or "y" column.</p>
             <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File not found: </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">tmp_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">data</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_tmp.csv&quot;</span>
         <span class="n">gdf</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+        <span class="c1"># If the temporary file exists, read the annotations from it</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">tmp_file</span><span class="p">):</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">tmp_file</span><span class="p">)</span>
+            <span class="n">gdf</span><span class="p">[</span><span class="n">ann_column</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">ann_column</span><span class="p">]</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">):</span>
         <span class="n">gdf</span> <span class="o">=</span> <span class="n">data</span>
     <span class="k">else</span><span class="p">:</span>
@@ -20439,6 +20449,7 @@ The first numerical column will be used if None. Defaults to None.</p></td>
     <span class="k">def</span> <span class="nf">on_save_click</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
         <span class="n">output</span><span class="o">.</span><span class="n">clear_output</span><span class="p">()</span>
         <span class="n">download_widget</span><span class="o">.</span><span class="n">clear_output</span><span class="p">()</span>
+
         <span class="n">m</span><span class="o">.</span><span class="n">gdf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">gdf</span><span class="p">[</span><span class="n">ann_column_edited</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;selected&quot;</span><span class="p">,</span> <span class="n">ann_column</span><span class="p">]</span> <span class="o">=</span> <span class="n">dropdown</span><span class="o">.</span><span class="n">value</span>
         <span class="n">m</span><span class="o">.</span><span class="n">gdf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">gdf</span><span class="p">[</span><span class="n">ann_column_edited</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;selected&quot;</span><span class="p">,</span> <span class="n">ann_column_edited</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">dropdown</span><span class="o">.</span><span class="n">value</span>
@@ -20465,6 +20476,10 @@ The first numerical column will be used if None. Defaults to None.</p></td>
 
         <span class="n">m</span><span class="o">.</span><span class="n">gdf</span><span class="p">[</span><span class="n">ann_column_edited</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">gdf</span><span class="p">[</span><span class="n">ann_column</span><span class="p">]</span>
         <span class="n">m</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">layer_name</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">gdf</span><span class="o">.</span><span class="n">__geo_interface__</span><span class="p">)</span>
+
+        <span class="c1"># Save the annotation to a temporary file</span>
+        <span class="n">temp_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_tmp.csv&quot;</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">gdf</span><span class="p">[[</span><span class="n">ann_column</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">temp_file</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="n">save</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">on_save_click</span><span class="p">)</span>
 
@@ -20513,6 +20528,11 @@ The first numerical column will be used if None. Defaults to None.</p></td>
                 <span class="n">output</span><span class="o">.</span><span class="n">clear_output</span><span class="p">()</span>
                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved CSV: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">output_csv</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved GeoJSON: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">output_geojson</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Remove the temporary file if it exists</span>
+        <span class="n">tmp_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_tmp.csv&quot;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">tmp_file</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">tmp_file</span><span class="p">)</span>
 
     <span class="n">export</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">on_export_click</span><span class="p">)</span>
 
