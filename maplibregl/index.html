@@ -985,6 +985,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#leafmap.maplibregl.Map.add_mapillary" class="md-nav__link">
+    <span class="md-ellipsis">
+      add_mapillary()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#leafmap.maplibregl.Map.add_marker" class="md-nav__link">
     <span class="md-ellipsis">
       add_marker()
@@ -3272,6 +3281,27 @@
   
   <span class="md-ellipsis">
     Map tiles
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../maplibre/mapillary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mapillary
   </span>
   
 
@@ -6154,6 +6184,15 @@
   <a href="#leafmap.maplibregl.Map.add_legend" class="md-nav__link">
     <span class="md-ellipsis">
       add_legend()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leafmap.maplibregl.Map.add_mapillary" class="md-nav__link">
+    <span class="md-ellipsis">
+      add_mapillary()
     </span>
   </a>
   
@@ -10518,6 +10557,93 @@ Map            (<span title="maplibre.ipywidget.MapWidget">MapWidget</span>)
                 <span class="n">position</span><span class="o">=</span><span class="n">legend_position</span><span class="p">,</span>
                 <span class="o">**</span><span class="n">legend_args</span><span class="p">,</span>
             <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_mapillary</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">minzoom</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+        <span class="n">maxzoom</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">14</span><span class="p">,</span>
+        <span class="n">sequence_lyr_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;sequence&quot;</span><span class="p">,</span>
+        <span class="n">image_lyr_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span>
+        <span class="n">sequence_paint</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">image_paint</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">image_minzoom</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">17</span><span class="p">,</span>
+        <span class="n">add_popup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">access_token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds Mapillary layers to the map.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            minzoom (int): Minimum zoom level for the Mapillary tiles. Defaults to 6.</span>
+<span class="sd">            maxzoom (int): Maximum zoom level for the Mapillary tiles. Defaults to 14.</span>
+<span class="sd">            sequence_lyr_name (str): Name of the sequence layer. Defaults to &quot;sequence&quot;.</span>
+<span class="sd">            image_lyr_name (str): Name of the image layer. Defaults to &quot;image&quot;.</span>
+<span class="sd">            sequence_paint (dict, optional): Paint properties for the sequence layer. Defaults to None.</span>
+<span class="sd">            image_paint (dict, optional): Paint properties for the image layer. Defaults to None.</span>
+<span class="sd">            image_minzoom (int): Minimum zoom level for the image layer. Defaults to 17.</span>
+<span class="sd">            add_popup (bool): Whether to add popups to the layers. Defaults to True.</span>
+<span class="sd">            access_token (str, optional): Access token for Mapillary API. Defaults to None.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If no access token is provided.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">access_token</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">access_token</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_api_key</span><span class="p">(</span><span class="s2">&quot;MAPILLARY_API_KEY&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">access_token</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;An access token is required to use Mapillary.&quot;</span><span class="p">)</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://tiles.mapillary.com/maps/vtp/mly1_public/2/</span><span class="se">{{</span><span class="s2">z</span><span class="se">}}</span><span class="s2">/</span><span class="se">{{</span><span class="s2">x</span><span class="se">}}</span><span class="s2">/</span><span class="se">{{</span><span class="s2">y</span><span class="se">}}</span><span class="s2">?access_token=</span><span class="si">{</span><span class="n">access_token</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="n">source</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;vector&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;tiles&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">url</span><span class="p">],</span>
+            <span class="s2">&quot;minzoom&quot;</span><span class="p">:</span> <span class="n">minzoom</span><span class="p">,</span>
+            <span class="s2">&quot;maxzoom&quot;</span><span class="p">:</span> <span class="n">maxzoom</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_source</span><span class="p">(</span><span class="s2">&quot;mapillary&quot;</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">sequence_paint</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sequence_paint</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;line-opacity&quot;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+                <span class="s2">&quot;line-color&quot;</span><span class="p">:</span> <span class="s2">&quot;#35AF6D&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;line-width&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="k">if</span> <span class="n">image_paint</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">image_paint</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;circle-radius&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="s2">&quot;circle-color&quot;</span><span class="p">:</span> <span class="s2">&quot;#3388ff&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;circle-stroke-color&quot;</span><span class="p">:</span> <span class="s2">&quot;#ffffff&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;circle-stroke-width&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="p">}</span>
+
+        <span class="n">sequence_lyr</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">sequence_lyr_name</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;line&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;mapillary&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;source-layer&quot;</span><span class="p">:</span> <span class="s2">&quot;sequence&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;layout&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;line-cap&quot;</span><span class="p">:</span> <span class="s2">&quot;round&quot;</span><span class="p">,</span> <span class="s2">&quot;line-join&quot;</span><span class="p">:</span> <span class="s2">&quot;round&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;paint&quot;</span><span class="p">:</span> <span class="n">sequence_paint</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">image_lyr</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">image_lyr_name</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;circle&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;mapillary&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;source-layer&quot;</span><span class="p">:</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;paint&quot;</span><span class="p">:</span> <span class="n">image_paint</span><span class="p">,</span>
+            <span class="s2">&quot;minzoom&quot;</span><span class="p">:</span> <span class="n">image_minzoom</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">first_symbol_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_first_symbol_layer</span><span class="p">()[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="n">sequence_lyr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">sequence_lyr_name</span><span class="p">,</span> <span class="n">before_id</span><span class="o">=</span><span class="n">first_symbol_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="n">image_lyr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">image_lyr_name</span><span class="p">,</span> <span class="n">before_id</span><span class="o">=</span><span class="n">first_symbol_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">add_popup</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_popup</span><span class="p">(</span><span class="n">sequence_lyr_name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_popup</span><span class="p">(</span><span class="n">image_lyr_name</span><span class="p">)</span>
 </code></pre></div>
         </details>
 
@@ -14545,6 +14671,213 @@ To make the background half transparent, set this to "rgba(255, 255, 255, 0.5)".
         <span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="leafmap.maplibregl.Map.add_mapillary" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">add_mapillary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minzoom</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">maxzoom</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">sequence_lyr_name</span><span class="o">=</span><span class="s1">&#39;sequence&#39;</span><span class="p">,</span> <span class="n">image_lyr_name</span><span class="o">=</span><span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="n">sequence_paint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">image_paint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">image_minzoom</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">add_popup</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">access_token</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+
+<a href="#leafmap.maplibregl.Map.add_mapillary" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Adds Mapillary layers to the map.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>minzoom</code></td>
+        <td><code>int</code></td>
+        <td><p>Minimum zoom level for the Mapillary tiles. Defaults to 6.</p></td>
+        <td><code>6</code></td>
+      </tr>
+      <tr>
+        <td><code>maxzoom</code></td>
+        <td><code>int</code></td>
+        <td><p>Maximum zoom level for the Mapillary tiles. Defaults to 14.</p></td>
+        <td><code>14</code></td>
+      </tr>
+      <tr>
+        <td><code>sequence_lyr_name</code></td>
+        <td><code>str</code></td>
+        <td><p>Name of the sequence layer. Defaults to "sequence".</p></td>
+        <td><code>&#39;sequence&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>image_lyr_name</code></td>
+        <td><code>str</code></td>
+        <td><p>Name of the image layer. Defaults to "image".</p></td>
+        <td><code>&#39;image&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>sequence_paint</code></td>
+        <td><code>dict</code></td>
+        <td><p>Paint properties for the sequence layer. Defaults to None.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>image_paint</code></td>
+        <td><code>dict</code></td>
+        <td><p>Paint properties for the image layer. Defaults to None.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>image_minzoom</code></td>
+        <td><code>int</code></td>
+        <td><p>Minimum zoom level for the image layer. Defaults to 17.</p></td>
+        <td><code>17</code></td>
+      </tr>
+      <tr>
+        <td><code>add_popup</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to add popups to the layers. Defaults to True.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>access_token</code></td>
+        <td><code>str</code></td>
+        <td><p>Access token for Mapillary API. Defaults to None.</p></td>
+        <td><code>None</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>If no access token is provided.</p></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>None</code></td>
+      <td><p>None</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>leafmap/maplibregl.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">add_mapillary</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">minzoom</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="n">maxzoom</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">14</span><span class="p">,</span>
+    <span class="n">sequence_lyr_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;sequence&quot;</span><span class="p">,</span>
+    <span class="n">image_lyr_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span>
+    <span class="n">sequence_paint</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">image_paint</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">image_minzoom</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">17</span><span class="p">,</span>
+    <span class="n">add_popup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">access_token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds Mapillary layers to the map.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        minzoom (int): Minimum zoom level for the Mapillary tiles. Defaults to 6.</span>
+<span class="sd">        maxzoom (int): Maximum zoom level for the Mapillary tiles. Defaults to 14.</span>
+<span class="sd">        sequence_lyr_name (str): Name of the sequence layer. Defaults to &quot;sequence&quot;.</span>
+<span class="sd">        image_lyr_name (str): Name of the image layer. Defaults to &quot;image&quot;.</span>
+<span class="sd">        sequence_paint (dict, optional): Paint properties for the sequence layer. Defaults to None.</span>
+<span class="sd">        image_paint (dict, optional): Paint properties for the image layer. Defaults to None.</span>
+<span class="sd">        image_minzoom (int): Minimum zoom level for the image layer. Defaults to 17.</span>
+<span class="sd">        add_popup (bool): Whether to add popups to the layers. Defaults to True.</span>
+<span class="sd">        access_token (str, optional): Access token for Mapillary API. Defaults to None.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no access token is provided.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">access_token</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">access_token</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_api_key</span><span class="p">(</span><span class="s2">&quot;MAPILLARY_API_KEY&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">access_token</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;An access token is required to use Mapillary.&quot;</span><span class="p">)</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://tiles.mapillary.com/maps/vtp/mly1_public/2/</span><span class="se">{{</span><span class="s2">z</span><span class="se">}}</span><span class="s2">/</span><span class="se">{{</span><span class="s2">x</span><span class="se">}}</span><span class="s2">/</span><span class="se">{{</span><span class="s2">y</span><span class="se">}}</span><span class="s2">?access_token=</span><span class="si">{</span><span class="n">access_token</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="n">source</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;vector&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tiles&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">url</span><span class="p">],</span>
+        <span class="s2">&quot;minzoom&quot;</span><span class="p">:</span> <span class="n">minzoom</span><span class="p">,</span>
+        <span class="s2">&quot;maxzoom&quot;</span><span class="p">:</span> <span class="n">maxzoom</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">add_source</span><span class="p">(</span><span class="s2">&quot;mapillary&quot;</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">sequence_paint</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sequence_paint</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;line-opacity&quot;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+            <span class="s2">&quot;line-color&quot;</span><span class="p">:</span> <span class="s2">&quot;#35AF6D&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;line-width&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="k">if</span> <span class="n">image_paint</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">image_paint</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;circle-radius&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s2">&quot;circle-color&quot;</span><span class="p">:</span> <span class="s2">&quot;#3388ff&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;circle-stroke-color&quot;</span><span class="p">:</span> <span class="s2">&quot;#ffffff&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;circle-stroke-width&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="n">sequence_lyr</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">sequence_lyr_name</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;line&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;mapillary&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;source-layer&quot;</span><span class="p">:</span> <span class="s2">&quot;sequence&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;layout&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;line-cap&quot;</span><span class="p">:</span> <span class="s2">&quot;round&quot;</span><span class="p">,</span> <span class="s2">&quot;line-join&quot;</span><span class="p">:</span> <span class="s2">&quot;round&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;paint&quot;</span><span class="p">:</span> <span class="n">sequence_paint</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">image_lyr</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">image_lyr_name</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;circle&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;mapillary&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;source-layer&quot;</span><span class="p">:</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;paint&quot;</span><span class="p">:</span> <span class="n">image_paint</span><span class="p">,</span>
+        <span class="s2">&quot;minzoom&quot;</span><span class="p">:</span> <span class="n">image_minzoom</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="n">first_symbol_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_first_symbol_layer</span><span class="p">()[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="n">sequence_lyr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">sequence_lyr_name</span><span class="p">,</span> <span class="n">before_id</span><span class="o">=</span><span class="n">first_symbol_id</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="n">image_lyr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">image_lyr_name</span><span class="p">,</span> <span class="n">before_id</span><span class="o">=</span><span class="n">first_symbol_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">add_popup</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_popup</span><span class="p">(</span><span class="n">sequence_lyr_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_popup</span><span class="p">(</span><span class="n">image_lyr_name</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
