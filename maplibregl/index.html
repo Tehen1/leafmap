@@ -1129,6 +1129,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#leafmap.maplibregl.Map.create_mapillary_widget" class="md-nav__link">
+    <span class="md-ellipsis">
+      create_mapillary_widget()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#leafmap.maplibregl.Map.find_first_symbol_layer" class="md-nav__link">
     <span class="md-ellipsis">
       find_first_symbol_layer()
@@ -6334,6 +6343,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#leafmap.maplibregl.Map.create_mapillary_widget" class="md-nav__link">
+    <span class="md-ellipsis">
+      create_mapillary_widget()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#leafmap.maplibregl.Map.find_first_symbol_layer" class="md-nav__link">
     <span class="md-ellipsis">
       find_first_symbol_layer()
@@ -10644,6 +10662,103 @@ Map            (<span title="maplibre.ipywidget.MapWidget">MapWidget</span>)
         <span class="k">if</span> <span class="n">add_popup</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_popup</span><span class="p">(</span><span class="n">sequence_lyr_name</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_popup</span><span class="p">(</span><span class="n">image_lyr_name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">create_mapillary_widget</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">lon</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">lat</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.00005</span><span class="p">,</span>
+        <span class="n">bbox</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">image_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;classic&quot;</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">560</span><span class="p">,</span>
+        <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+        <span class="n">frame_border</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">link</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">container</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">column_widths</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">Row</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a Mapillary widget.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            lon (Optional[float]): Longitude of the location. Defaults to None.</span>
+<span class="sd">            lat (Optional[float]): Latitude of the location. Defaults to None.</span>
+<span class="sd">            radius (float): Search radius for Mapillary images. Defaults to 0.00005.</span>
+<span class="sd">            bbox (Optional[Union[str, List[float]]]): Bounding box for the search. Defaults to None.</span>
+<span class="sd">            image_id (Optional[str]): ID of the Mapillary image. Defaults to None.</span>
+<span class="sd">            style (str): Style of the Mapillary image. Defaults to &quot;classic&quot;.</span>
+<span class="sd">            width (int): Width of the iframe. Defaults to 560.</span>
+<span class="sd">            height (int): Height of the iframe. Defaults to 600.</span>
+<span class="sd">            frame_border (int): Frame border of the iframe. Defaults to 0.</span>
+<span class="sd">            link (bool): Whether to link the widget to map clicks. Defaults to True.</span>
+<span class="sd">            container (bool): Whether to return the widget in a container. Defaults to True.</span>
+<span class="sd">            column_widths (List[int]): Widths of the columns in the container. Defaults to [8, 1].</span>
+<span class="sd">            **kwargs: Additional keyword arguments for the widget.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Union[widgets.HTML, v.Row]: The Mapillary widget or a container with the widget.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">image_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">lon</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">lat</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">lon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">[</span><span class="s2">&quot;lng&quot;</span><span class="p">]</span>
+                    <span class="n">lat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">lon</span> <span class="o">=</span> <span class="mi">0</span>
+                    <span class="n">lat</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">image_ids</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">search_mapillary_images</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_ids</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">image_id</span> <span class="o">=</span> <span class="n">image_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">image_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">widget</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">widget</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_mapillary_image_widget</span><span class="p">(</span>
+                <span class="n">image_id</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">frame_border</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">link</span><span class="p">:</span>
+
+            <span class="k">def</span> <span class="nf">log_lng_lat</span><span class="p">(</span><span class="n">lng_lat</span><span class="p">):</span>
+                <span class="n">lon</span> <span class="o">=</span> <span class="n">lng_lat</span><span class="o">.</span><span class="n">new</span><span class="p">[</span><span class="s2">&quot;lng&quot;</span><span class="p">]</span>
+                <span class="n">lat</span> <span class="o">=</span> <span class="n">lng_lat</span><span class="o">.</span><span class="n">new</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">]</span>
+                <span class="n">image_id</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">search_mapillary_images</span><span class="p">(</span>
+                    <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_id</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">content</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                    &lt;iframe</span>
+<span class="s2">                        src=&quot;https://www.mapillary.com/embed?image_key=</span><span class="si">{</span><span class="n">image_id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&amp;style=</span><span class="si">{</span><span class="n">style</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">                        height=&quot;</span><span class="si">{</span><span class="n">height</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">                        width=&quot;</span><span class="si">{</span><span class="n">width</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">                        frameborder=&quot;</span><span class="si">{</span><span class="n">frame_border</span><span class="si">}</span><span class="s2">&quot;&gt;</span>
+<span class="s2">                    &lt;/iframe&gt;</span>
+<span class="s2">                    &quot;&quot;&quot;</span>
+                    <span class="n">widget</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">content</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">log_lng_lat</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="s2">&quot;clicked&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">container</span><span class="p">:</span>
+            <span class="n">left_col_layout</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
+                <span class="n">cols</span><span class="o">=</span><span class="n">column_widths</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="p">],</span>
+                <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;pa-1&quot;</span><span class="p">,</span>  <span class="c1"># padding for consistent spacing</span>
+            <span class="p">)</span>
+            <span class="n">right_col_layout</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
+                <span class="n">cols</span><span class="o">=</span><span class="n">column_widths</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="n">widget</span><span class="p">],</span>
+                <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;pa-1&quot;</span><span class="p">,</span>  <span class="c1"># padding for consistent spacing</span>
+            <span class="p">)</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">Row</span><span class="p">(</span>
+                <span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="n">left_col_layout</span><span class="p">,</span> <span class="n">right_col_layout</span><span class="p">],</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">row</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="n">widget</span>
 </code></pre></div>
         </details>
 
@@ -17601,6 +17716,232 @@ See https://eodagmbh.github.io/py-maplibregl/api/layer/ for more information.</p
 
 
 
+<h3 id="leafmap.maplibregl.Map.create_mapillary_widget" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">create_mapillary_widget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">5e-05</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">image_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;classic&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">560</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">frame_border</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">link</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">container</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">column_widths</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+
+<a href="#leafmap.maplibregl.Map.create_mapillary_widget" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Creates a Mapillary widget.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>lon</code></td>
+        <td><code>Optional[float]</code></td>
+        <td><p>Longitude of the location. Defaults to None.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>lat</code></td>
+        <td><code>Optional[float]</code></td>
+        <td><p>Latitude of the location. Defaults to None.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>radius</code></td>
+        <td><code>float</code></td>
+        <td><p>Search radius for Mapillary images. Defaults to 0.00005.</p></td>
+        <td><code>5e-05</code></td>
+      </tr>
+      <tr>
+        <td><code>bbox</code></td>
+        <td><code>Optional[Union[str, List[float]]]</code></td>
+        <td><p>Bounding box for the search. Defaults to None.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>image_id</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>ID of the Mapillary image. Defaults to None.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>style</code></td>
+        <td><code>str</code></td>
+        <td><p>Style of the Mapillary image. Defaults to "classic".</p></td>
+        <td><code>&#39;classic&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>width</code></td>
+        <td><code>int</code></td>
+        <td><p>Width of the iframe. Defaults to 560.</p></td>
+        <td><code>560</code></td>
+      </tr>
+      <tr>
+        <td><code>height</code></td>
+        <td><code>int</code></td>
+        <td><p>Height of the iframe. Defaults to 600.</p></td>
+        <td><code>600</code></td>
+      </tr>
+      <tr>
+        <td><code>frame_border</code></td>
+        <td><code>int</code></td>
+        <td><p>Frame border of the iframe. Defaults to 0.</p></td>
+        <td><code>0</code></td>
+      </tr>
+      <tr>
+        <td><code>link</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to link the widget to map clicks. Defaults to True.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>container</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to return the widget in a container. Defaults to True.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>column_widths</code></td>
+        <td><code>List[int]</code></td>
+        <td><p>Widths of the columns in the container. Defaults to [8, 1].</p></td>
+        <td><code>[8, 1]</code></td>
+      </tr>
+      <tr>
+        <td><code>**kwargs</code></td>
+        <td><code>Any</code></td>
+        <td><p>Additional keyword arguments for the widget.</p></td>
+        <td><code>{}</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Union[widgets.HTML, v.Row]</code></td>
+      <td><p>The Mapillary widget or a container with the widget.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>leafmap/maplibregl.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_mapillary_widget</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">lon</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">lat</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.00005</span><span class="p">,</span>
+    <span class="n">bbox</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">image_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;classic&quot;</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">560</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="n">frame_border</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">link</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">container</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">column_widths</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">Row</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a Mapillary widget.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        lon (Optional[float]): Longitude of the location. Defaults to None.</span>
+<span class="sd">        lat (Optional[float]): Latitude of the location. Defaults to None.</span>
+<span class="sd">        radius (float): Search radius for Mapillary images. Defaults to 0.00005.</span>
+<span class="sd">        bbox (Optional[Union[str, List[float]]]): Bounding box for the search. Defaults to None.</span>
+<span class="sd">        image_id (Optional[str]): ID of the Mapillary image. Defaults to None.</span>
+<span class="sd">        style (str): Style of the Mapillary image. Defaults to &quot;classic&quot;.</span>
+<span class="sd">        width (int): Width of the iframe. Defaults to 560.</span>
+<span class="sd">        height (int): Height of the iframe. Defaults to 600.</span>
+<span class="sd">        frame_border (int): Frame border of the iframe. Defaults to 0.</span>
+<span class="sd">        link (bool): Whether to link the widget to map clicks. Defaults to True.</span>
+<span class="sd">        container (bool): Whether to return the widget in a container. Defaults to True.</span>
+<span class="sd">        column_widths (List[int]): Widths of the columns in the container. Defaults to [8, 1].</span>
+<span class="sd">        **kwargs: Additional keyword arguments for the widget.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Union[widgets.HTML, v.Row]: The Mapillary widget or a container with the widget.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">image_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">lon</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">lat</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">lon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">[</span><span class="s2">&quot;lng&quot;</span><span class="p">]</span>
+                <span class="n">lat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">lon</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">lat</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">image_ids</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">search_mapillary_images</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_ids</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">image_id</span> <span class="o">=</span> <span class="n">image_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">image_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">widget</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">widget</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_mapillary_image_widget</span><span class="p">(</span>
+            <span class="n">image_id</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">frame_border</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">link</span><span class="p">:</span>
+
+        <span class="k">def</span> <span class="nf">log_lng_lat</span><span class="p">(</span><span class="n">lng_lat</span><span class="p">):</span>
+            <span class="n">lon</span> <span class="o">=</span> <span class="n">lng_lat</span><span class="o">.</span><span class="n">new</span><span class="p">[</span><span class="s2">&quot;lng&quot;</span><span class="p">]</span>
+            <span class="n">lat</span> <span class="o">=</span> <span class="n">lng_lat</span><span class="o">.</span><span class="n">new</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">]</span>
+            <span class="n">image_id</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">search_mapillary_images</span><span class="p">(</span>
+                <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_id</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">content</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                &lt;iframe</span>
+<span class="s2">                    src=&quot;https://www.mapillary.com/embed?image_key=</span><span class="si">{</span><span class="n">image_id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&amp;style=</span><span class="si">{</span><span class="n">style</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">                    height=&quot;</span><span class="si">{</span><span class="n">height</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">                    width=&quot;</span><span class="si">{</span><span class="n">width</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">                    frameborder=&quot;</span><span class="si">{</span><span class="n">frame_border</span><span class="si">}</span><span class="s2">&quot;&gt;</span>
+<span class="s2">                &lt;/iframe&gt;</span>
+<span class="s2">                &quot;&quot;&quot;</span>
+                <span class="n">widget</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">content</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">log_lng_lat</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="s2">&quot;clicked&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">container</span><span class="p">:</span>
+        <span class="n">left_col_layout</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
+            <span class="n">cols</span><span class="o">=</span><span class="n">column_widths</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="p">],</span>
+            <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;pa-1&quot;</span><span class="p">,</span>  <span class="c1"># padding for consistent spacing</span>
+        <span class="p">)</span>
+        <span class="n">right_col_layout</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
+            <span class="n">cols</span><span class="o">=</span><span class="n">column_widths</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="n">widget</span><span class="p">],</span>
+            <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;pa-1&quot;</span><span class="p">,</span>  <span class="c1"># padding for consistent spacing</span>
+        <span class="p">)</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">Row</span><span class="p">(</span>
+            <span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="n">left_col_layout</span><span class="p">,</span> <span class="n">right_col_layout</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">row</span>
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="k">return</span> <span class="n">widget</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
 <h3 id="leafmap.maplibregl.Map.find_first_symbol_layer" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">find_first_symbol_layer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
@@ -20081,6 +20422,7 @@ https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#zoomto</p>
     </div>
 
   </div>
+
 
 
 
