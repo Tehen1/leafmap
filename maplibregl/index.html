@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.47">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
     
     
       
@@ -10341,6 +10341,9 @@ Map            (<span title="maplibre.ipywidget.MapWidget">MapWidget</span>)
                 <span class="s2">&quot;geometry&quot;</span><span class="p">,</span>
             <span class="p">]</span>
 
+        <span class="k">if</span> <span class="n">ann_column</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+            <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ann_column</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="n">ann_column_edited</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
             <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ann_column_edited</span><span class="p">)</span>
         <span class="k">if</span> <span class="s2">&quot;geometry&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
@@ -13874,6 +13877,9 @@ which assumes the y coordinates are in the "latitude", "lat", or "y" column.</p>
             <span class="n">ann_column_edited</span><span class="p">,</span>
             <span class="s2">&quot;geometry&quot;</span><span class="p">,</span>
         <span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">ann_column</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+        <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ann_column</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">ann_column_edited</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
         <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ann_column_edited</span><span class="p">)</span>
