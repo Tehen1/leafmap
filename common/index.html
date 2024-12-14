@@ -1791,6 +1791,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#leafmap.common.get_image_colormap" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_image_colormap()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#leafmap.common.get_local_tile_layer" class="md-nav__link">
     <span class="md-ellipsis">
       get_local_tile_layer()
@@ -3405,6 +3414,15 @@
   <a href="#leafmap.common.widget_template" class="md-nav__link">
     <span class="md-ellipsis">
       widget_template()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leafmap.common.write_image_colormap" class="md-nav__link">
+    <span class="md-ellipsis">
+      write_image_colormap()
     </span>
   </a>
   
@@ -8126,6 +8144,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/103_raster_colormap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    103 raster colormap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9285,6 +9324,15 @@
   <a href="#leafmap.common.get_google_map" class="md-nav__link">
     <span class="md-ellipsis">
       get_google_map()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leafmap.common.get_image_colormap" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_image_colormap()
     </span>
   </a>
   
@@ -10905,6 +10953,15 @@
   <a href="#leafmap.common.widget_template" class="md-nav__link">
     <span class="md-ellipsis">
       widget_template()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leafmap.common.write_image_colormap" class="md-nav__link">
+    <span class="md-ellipsis">
+      write_image_colormap()
     </span>
   </a>
   
@@ -13263,7 +13320,7 @@ WhiteboxTools            (<span title="whitebox.whitebox_tools.WhiteboxTools">Wh
 
 
 <h2 id="leafmap.common.array_to_image" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">array_to_image</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="s1">&#39;deflate&#39;</span><span class="p">,</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cellsize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s1">&#39;COG&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">array_to_image</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="s1">&#39;deflate&#39;</span><span class="p">,</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cellsize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s1">&#39;COG&#39;</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 <a href="#leafmap.common.array_to_image" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -13345,6 +13402,12 @@ Defaults to None.</p></td>
         <td><code>&#39;COG&#39;</code></td>
       </tr>
       <tr>
+        <td><code>colormap</code></td>
+        <td><code>dict</code></td>
+        <td><p>A dictionary defining the colormap (value: (R, G, B, A)).</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
         <td><code>**kwargs</code></td>
         <td></td>
         <td><p>Additional keyword arguments to be passed to the rasterio.open() function.</p></td>
@@ -13365,6 +13428,7 @@ Defaults to None.</p></td>
     <span class="n">crs</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">transform</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">driver</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;COG&quot;</span><span class="p">,</span>
+    <span class="n">colormap</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Save a NumPy array as a GeoTIFF using the projection information from an existing GeoTIFF file.</span>
@@ -13381,6 +13445,7 @@ Defaults to None.</p></td>
 <span class="sd">        transform (tuple, optional): The affine transformation matrix, can be rio.transform() or a tuple like (0.5, 0.0, -180.25, 0.0, -0.5, 83.780361).</span>
 <span class="sd">            Defaults to None.</span>
 <span class="sd">        driver (str, optional): The driver to use for creating the output file, such as &#39;GTiff&#39;. Defaults to &quot;COG&quot;.</span>
+<span class="sd">        colormap (dict, optional): A dictionary defining the colormap (value: (R, G, B, A)).</span>
 <span class="sd">        **kwargs: Additional keyword arguments to be passed to the rasterio.open() function.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -13401,6 +13466,7 @@ Defaults to None.</p></td>
             <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="p">,</span>
             <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">,</span>
             <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">,</span>
+            <span class="n">colormap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
         <span class="p">)</span>
 
@@ -13429,7 +13495,9 @@ Defaults to None.</p></td>
             <span class="n">array</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">to_raster</span><span class="p">(</span>
                 <span class="n">output</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="n">compress</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
             <span class="p">)</span>
-            <span class="k">return</span>
+            <span class="k">if</span> <span class="n">colormap</span><span class="p">:</span>
+                <span class="n">write_image_colormap</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">colormap</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">output</span>
 
     <span class="k">if</span> <span class="n">array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">transpose</span><span class="p">:</span>
         <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
@@ -13512,14 +13580,18 @@ Defaults to None.</p></td>
         <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;compress&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">compress</span>
 
     <span class="n">metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
     <span class="c1"># Create a new GeoTIFF file and write the array to it</span>
     <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">metadata</span><span class="p">)</span> <span class="k">as</span> <span class="n">dst</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="n">dst</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">colormap</span><span class="p">:</span>
+                <span class="n">dst</span><span class="o">.</span><span class="n">write_colormap</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">colormap</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
                 <span class="n">dst</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">colormap</span><span class="p">:</span>
+                    <span class="n">dst</span><span class="o">.</span><span class="n">write_colormap</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">colormap</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span>
 </code></pre></div>
         </details>
     </div>
@@ -13533,7 +13605,7 @@ Defaults to None.</p></td>
 
 
 <h2 id="leafmap.common.array_to_memory_file" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">array_to_memory_file</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="s1">&#39;deflate&#39;</span><span class="p">,</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cellsize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s1">&#39;COG&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">array_to_memory_file</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="s1">&#39;deflate&#39;</span><span class="p">,</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cellsize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s1">&#39;COG&#39;</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 <a href="#leafmap.common.array_to_memory_file" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -13599,7 +13671,7 @@ Defaults to None.</p></td>
         <td><code>transform</code></td>
         <td><code>tuple</code></td>
         <td><p>The affine transformation matrix if source is not provided.
-Can be rio.transform() or a tuple like (0.5, 0.0, -180.25, 0.0, -0.5, 83.780361). Defaults to None</p></td>
+Can be rio.transform() or a tuple like (0.5, 0.0, -180.25, 0.0, -0.5, 83.780361). Defaults to None.</p></td>
         <td><code>None</code></td>
       </tr>
       <tr>
@@ -13607,6 +13679,12 @@ Can be rio.transform() or a tuple like (0.5, 0.0, -180.25, 0.0, -0.5, 83.780361)
         <td><code>str</code></td>
         <td><p>The driver to use for creating the output file, such as 'GTiff'. Defaults to "COG".</p></td>
         <td><code>&#39;COG&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>colormap</code></td>
+        <td><code>dict</code></td>
+        <td><p>A dictionary defining the colormap (value: (R, G, B, A)).</p></td>
+        <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>**kwargs</code></td>
@@ -13643,6 +13721,7 @@ Can be rio.transform() or a tuple like (0.5, 0.0, -180.25, 0.0, -0.5, 83.780361)
     <span class="n">crs</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">transform</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;COG&quot;</span><span class="p">,</span>
+    <span class="n">colormap</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a NumPy array to a memory file.</span>
@@ -13656,8 +13735,9 @@ Can be rio.transform() or a tuple like (0.5, 0.0, -180.25, 0.0, -0.5, 83.780361)
 <span class="sd">        cellsize (float, optional): The cell size of the array if source is not provided. Defaults to None.</span>
 <span class="sd">        crs (str, optional): The coordinate reference system of the array if source is not provided. Defaults to None.</span>
 <span class="sd">        transform (tuple, optional): The affine transformation matrix if source is not provided.</span>
-<span class="sd">            Can be rio.transform() or a tuple like (0.5, 0.0, -180.25, 0.0, -0.5, 83.780361). Defaults to None</span>
+<span class="sd">            Can be rio.transform() or a tuple like (0.5, 0.0, -180.25, 0.0, -0.5, 83.780361). Defaults to None.</span>
 <span class="sd">        driver (str, optional): The driver to use for creating the output file, such as &#39;GTiff&#39;. Defaults to &quot;COG&quot;.</span>
+<span class="sd">        colormap (dict, optional): A dictionary defining the colormap (value: (R, G, B, A)).</span>
 <span class="sd">        **kwargs: Additional keyword arguments to be passed to the rasterio.open() function.</span>
 
 <span class="sd">    Returns:</span>
@@ -13743,7 +13823,6 @@ Can be rio.transform() or a tuple like (0.5, 0.0, -180.25, 0.0, -0.5, 83.780361)
 
     <span class="c1"># Convert the array to the best dtype</span>
     <span class="n">array</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
-
     <span class="c1"># Define the GeoTIFF metadata</span>
     <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;driver&quot;</span><span class="p">:</span> <span class="n">driver</span><span class="p">,</span>
@@ -13769,12 +13848,15 @@ Can be rio.transform() or a tuple like (0.5, 0.0, -180.25, 0.0, -0.5, 83.780361)
 
     <span class="k">if</span> <span class="n">array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
         <span class="n">dst</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">colormap</span><span class="p">:</span>
+            <span class="n">dst</span><span class="o">.</span><span class="n">write_colormap</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">colormap</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
             <span class="n">dst</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">colormap</span><span class="p">:</span>
+                <span class="n">dst</span><span class="o">.</span><span class="n">write_colormap</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">colormap</span><span class="p">)</span>
 
     <span class="n">dst</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
     <span class="c1"># Read the dataset from memory</span>
     <span class="n">dataset_reader</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">dst</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
 
@@ -26430,6 +26512,133 @@ Source code adapted from https://github.com/mapbox/rasterio/blob/master/rasterio
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;backend must be either &#39;ipyleaflet&#39; or &#39;folium&#39;&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">layer</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="leafmap.common.get_image_colormap" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_image_colormap</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
+
+
+<a href="#leafmap.common.get_image_colormap" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Retrieve the colormap from an image.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>image</code></td>
+        <td><code>str, rasterio.io.DatasetReader, rioxarray.DataArray</code></td>
+        <td><p>The input image. It can be:
+- A file path to a raster image (string).
+- A rasterio dataset.
+- A rioxarray DataArray.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>index</code></td>
+        <td><code>int</code></td>
+        <td><p>The band index to retrieve the colormap from (default is 1).</p></td>
+        <td><code>1</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>dict</code></td>
+      <td><p>A dictionary representing the colormap (value: (R, G, B, A)), or None if no colormap is found.</p></td>
+    </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>If the input image type is unsupported.</p></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>leafmap/common.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_image_colormap</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve the colormap from an image.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (str, rasterio.io.DatasetReader, rioxarray.DataArray):</span>
+<span class="sd">            The input image. It can be:</span>
+<span class="sd">            - A file path to a raster image (string).</span>
+<span class="sd">            - A rasterio dataset.</span>
+<span class="sd">            - A rioxarray DataArray.</span>
+<span class="sd">        index (int): The band index to retrieve the colormap from (default is 1).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: A dictionary representing the colormap (value: (R, G, B, A)), or None if no colormap is found.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the input image type is unsupported.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">rasterio</span>
+    <span class="kn">import</span> <span class="nn">rioxarray</span>
+    <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+
+    <span class="n">dataset</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>  <span class="c1"># File path</span>
+        <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ds</span><span class="o">.</span><span class="n">colormap</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="k">if</span> <span class="n">ds</span><span class="o">.</span><span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">DatasetReader</span><span class="p">):</span>  <span class="c1"># rasterio dataset</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">image</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">encoding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">source</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">source</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">ds</span><span class="o">.</span><span class="n">colormap</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="k">if</span> <span class="n">ds</span><span class="o">.</span><span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Cannot extract colormap: DataArray does not have a source.&quot;</span>
+            <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Unsupported input type. Provide a file path, rasterio dataset, or rioxarray DataArray.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">dataset</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">colormap</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="k">if</span> <span class="n">dataset</span><span class="o">.</span><span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
 </code></pre></div>
         </details>
     </div>
@@ -49165,6 +49374,164 @@ include 'first', 'last' (default), 'min', 'max', 'sum', 'number'. Defaults to 'l
 
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">toolbar_widget</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="leafmap.common.write_image_colormap" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">write_image_colormap</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">colormap</span><span class="p">,</span> <span class="n">output_path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+
+<a href="#leafmap.common.write_image_colormap" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Apply or update a colormap to a raster image.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>image</code></td>
+        <td><code>str, rasterio.io.DatasetReader, rioxarray.DataArray</code></td>
+        <td><p>The input image. It can be:
+- A file path to a raster image (string).
+- A rasterio dataset.
+- A rioxarray DataArray.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>colormap</code></td>
+        <td><code>dict</code></td>
+        <td><p>A dictionary defining the colormap (value: (R, G, B, A)).</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>output_path</code></td>
+        <td><code>str</code></td>
+        <td><p>Path to save the updated raster image.
+If None, the original file is updated in-memory.</p></td>
+        <td><code>None</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td><p>Path to the updated raster image.</p></td>
+    </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>If the input image type is unsupported.</p></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>leafmap/common.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">write_image_colormap</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">colormap</span><span class="p">,</span> <span class="n">output_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply or update a colormap to a raster image.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (str, rasterio.io.DatasetReader, rioxarray.DataArray):</span>
+<span class="sd">            The input image. It can be:</span>
+<span class="sd">            - A file path to a raster image (string).</span>
+<span class="sd">            - A rasterio dataset.</span>
+<span class="sd">            - A rioxarray DataArray.</span>
+<span class="sd">        colormap (dict): A dictionary defining the colormap (value: (R, G, B, A)).</span>
+<span class="sd">        output_path (str, optional): Path to save the updated raster image.</span>
+<span class="sd">            If None, the original file is updated in-memory.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Path to the updated raster image.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the input image type is unsupported.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">rasterio</span>
+    <span class="kn">import</span> <span class="nn">rioxarray</span>
+    <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+
+    <span class="n">dataset</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">src_profile</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">src_data</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>  <span class="c1"># File path</span>
+        <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
+            <span class="n">dataset</span> <span class="o">=</span> <span class="n">ds</span>
+            <span class="n">src_profile</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">profile</span>
+            <span class="n">src_data</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Assuming single-band</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">DatasetReader</span><span class="p">):</span>  <span class="c1"># rasterio dataset</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">image</span>
+        <span class="n">src_profile</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">profile</span>
+        <span class="n">src_data</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Assuming single-band</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">):</span>  <span class="c1"># rioxarray DataArray</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">encoding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">source</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">source</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
+                <span class="n">dataset</span> <span class="o">=</span> <span class="n">ds</span>
+                <span class="n">src_profile</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">profile</span>
+                <span class="n">src_data</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Assuming single-band</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot apply colormap: DataArray does not have a source.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Unsupported input type. Provide a file path, rasterio dataset, or rioxarray DataArray.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Ensure the dataset is single-band</span>
+    <span class="k">if</span> <span class="n">dataset</span><span class="o">.</span><span class="n">count</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Colormaps can only be applied to single-band raster datasets.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Update the profile and colormap</span>
+    <span class="n">src_profile</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">src_data</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">output_path</span><span class="p">:</span>
+        <span class="n">output_path</span> <span class="o">=</span> <span class="s2">&quot;output_with_colormap.tif&quot;</span>
+
+    <span class="c1"># Write the updated dataset with the colormap</span>
+    <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">src_profile</span><span class="p">)</span> <span class="k">as</span> <span class="n">dst</span><span class="p">:</span>
+        <span class="n">dst</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">src_data</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">dst</span><span class="o">.</span><span class="n">write_colormap</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">colormap</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">output_path</span>
 </code></pre></div>
         </details>
     </div>

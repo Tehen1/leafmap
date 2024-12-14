@@ -5582,6 +5582,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/103_raster_colormap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    103 raster colormap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8479,7 +8500,7 @@
 
     <span class="n">palette</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Dropdown</span><span class="p">(</span>
         <span class="n">options</span><span class="o">=</span><span class="n">cmap_options</span><span class="p">,</span>
-        <span class="n">value</span><span class="o">=</span><span class="s2">&quot;tab10&quot;</span><span class="p">,</span>
+        <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Colormap:&quot;</span><span class="p">,</span>
         <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
         <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s2">&quot;200px&quot;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">padding</span><span class="p">),</span>
@@ -8669,7 +8690,11 @@
                         <span class="n">da</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;band_data&quot;</span><span class="p">]</span>
                         <span class="n">nodata</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;NODATA&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
                         <span class="n">da</span> <span class="o">=</span> <span class="n">da</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">nodata</span><span class="p">)</span>
-                        <span class="n">image</span> <span class="o">=</span> <span class="n">array_to_image</span><span class="p">(</span><span class="n">da</span><span class="p">)</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">colormap</span> <span class="o">=</span> <span class="n">get_image_colormap</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+                        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                            <span class="n">colormap</span> <span class="o">=</span> <span class="kc">None</span>
+                        <span class="n">image</span> <span class="o">=</span> <span class="n">array_to_image</span><span class="p">(</span><span class="n">da</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="n">colormap</span><span class="p">)</span>
                         <span class="nb">setattr</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s2">&quot;_NASA_DATA_IMAGE&quot;</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
                         <span class="n">name_prefix</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
                         <span class="n">items</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
@@ -8703,7 +8728,7 @@
             <span class="n">dataset</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="n">layer</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">layer</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="n">palette</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;tab10&quot;</span>
+            <span class="n">palette</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="n">output</span><span class="o">.</span><span class="n">clear_output</span><span class="p">()</span>
 
             <span class="k">if</span> <span class="s2">&quot;Footprints&quot;</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">get_layer_names</span><span class="p">():</span>
