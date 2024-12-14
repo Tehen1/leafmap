@@ -8101,12 +8101,15 @@ Map            (<span title="folium.folium.Map">Map</span>)
 <span class="sd">            layer_name (str, optional): The layer name to use. Defaults to &#39;Raster&#39;.</span>
 <span class="sd">            array_args (dict, optional): Additional arguments to pass to `array_to_image`. Defaults to {}.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
+        <span class="kn">import</span> <span class="nn">sys</span>
         <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
         <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">):</span>
             <span class="n">source</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">array_to_image</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="o">**</span><span class="n">array_args</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;cors_all&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="n">tile_layer</span><span class="p">,</span> <span class="n">tile_client</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_local_tile_layer</span><span class="p">(</span>
             <span class="n">source</span><span class="p">,</span>
@@ -10049,6 +10052,13 @@ Map            (<span title="folium.folium.Map">Map</span>)
 <span class="sd">            left_array_args (dict, optional): The arguments for array_to_image for the left layer. Defaults to {}.</span>
 <span class="sd">            right_array_args (dict, optional): The arguments for array_to_image for the right layer. Defaults to {}.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">sys</span>
+
+        <span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+            <span class="n">client_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cors_all&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">client_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cors_all&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+
         <span class="k">if</span> <span class="s2">&quot;max_zoom&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">left_args</span><span class="p">:</span>
             <span class="n">left_args</span><span class="p">[</span><span class="s2">&quot;max_zoom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">30</span>
         <span class="k">if</span> <span class="s2">&quot;max_native_zoom&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">left_args</span><span class="p">:</span>
@@ -10110,6 +10120,7 @@ Map            (<span title="folium.folium.Map">Map</span>)
                         <span class="n">left_layer</span><span class="p">,</span>
                         <span class="n">tile_format</span><span class="o">=</span><span class="s2">&quot;folium&quot;</span><span class="p">,</span>
                         <span class="n">return_client</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">client_args</span><span class="o">=</span><span class="n">client_args</span><span class="p">,</span>
                         <span class="o">**</span><span class="n">left_args</span><span class="p">,</span>
                     <span class="p">)</span>
                     <span class="n">bounds</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">image_bounds</span><span class="p">(</span><span class="n">left_client</span><span class="p">)</span>
@@ -10132,6 +10143,7 @@ Map            (<span title="folium.folium.Map">Map</span>)
                     <span class="n">left_layer</span><span class="p">,</span>
                     <span class="n">return_client</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                     <span class="n">tile_format</span><span class="o">=</span><span class="s2">&quot;folium&quot;</span><span class="p">,</span>
+                    <span class="n">client_args</span><span class="o">=</span><span class="n">client_args</span><span class="p">,</span>
                     <span class="o">**</span><span class="n">left_args</span><span class="p">,</span>
                 <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -10171,6 +10183,7 @@ Map            (<span title="folium.folium.Map">Map</span>)
                         <span class="n">right_layer</span><span class="p">,</span>
                         <span class="n">tile_format</span><span class="o">=</span><span class="s2">&quot;folium&quot;</span><span class="p">,</span>
                         <span class="n">return_client</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">client_args</span><span class="o">=</span><span class="n">client_args</span><span class="p">,</span>
                         <span class="o">**</span><span class="n">right_args</span><span class="p">,</span>
                     <span class="p">)</span>
                     <span class="n">bounds</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">image_bounds</span><span class="p">(</span><span class="n">right_client</span><span class="p">)</span>
@@ -10192,6 +10205,7 @@ Map            (<span title="folium.folium.Map">Map</span>)
                     <span class="n">right_layer</span><span class="p">,</span>
                     <span class="n">return_client</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                     <span class="n">tile_format</span><span class="o">=</span><span class="s2">&quot;folium&quot;</span><span class="p">,</span>
+                    <span class="n">client_args</span><span class="o">=</span><span class="n">client_args</span><span class="p">,</span>
                     <span class="o">**</span><span class="n">right_args</span><span class="p">,</span>
                 <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -13738,12 +13752,15 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
 <span class="sd">        layer_name (str, optional): The layer name to use. Defaults to &#39;Raster&#39;.</span>
 <span class="sd">        array_args (dict, optional): Additional arguments to pass to `array_to_image`. Defaults to {}.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
+    <span class="kn">import</span> <span class="nn">sys</span>
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
     <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">):</span>
         <span class="n">source</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">array_to_image</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="o">**</span><span class="n">array_args</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;cors_all&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="n">tile_layer</span><span class="p">,</span> <span class="n">tile_client</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_local_tile_layer</span><span class="p">(</span>
         <span class="n">source</span><span class="p">,</span>
@@ -16357,12 +16374,15 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
 <span class="sd">        layer_name (str, optional): The layer name to use. Defaults to &#39;Raster&#39;.</span>
 <span class="sd">        array_args (dict, optional): Additional arguments to pass to `array_to_image`. Defaults to {}.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
+    <span class="kn">import</span> <span class="nn">sys</span>
     <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
     <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">):</span>
         <span class="n">source</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">array_to_image</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="o">**</span><span class="n">array_args</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;cors_all&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="n">tile_layer</span><span class="p">,</span> <span class="n">tile_client</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_local_tile_layer</span><span class="p">(</span>
         <span class="n">source</span><span class="p">,</span>
@@ -18704,6 +18724,13 @@ https://github.com/iwpnd/folium-vectorgrid</p></td>
 <span class="sd">        left_array_args (dict, optional): The arguments for array_to_image for the left layer. Defaults to {}.</span>
 <span class="sd">        right_array_args (dict, optional): The arguments for array_to_image for the right layer. Defaults to {}.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+
+    <span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+        <span class="n">client_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cors_all&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">client_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cors_all&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+
     <span class="k">if</span> <span class="s2">&quot;max_zoom&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">left_args</span><span class="p">:</span>
         <span class="n">left_args</span><span class="p">[</span><span class="s2">&quot;max_zoom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">30</span>
     <span class="k">if</span> <span class="s2">&quot;max_native_zoom&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">left_args</span><span class="p">:</span>
@@ -18765,6 +18792,7 @@ https://github.com/iwpnd/folium-vectorgrid</p></td>
                     <span class="n">left_layer</span><span class="p">,</span>
                     <span class="n">tile_format</span><span class="o">=</span><span class="s2">&quot;folium&quot;</span><span class="p">,</span>
                     <span class="n">return_client</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">client_args</span><span class="o">=</span><span class="n">client_args</span><span class="p">,</span>
                     <span class="o">**</span><span class="n">left_args</span><span class="p">,</span>
                 <span class="p">)</span>
                 <span class="n">bounds</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">image_bounds</span><span class="p">(</span><span class="n">left_client</span><span class="p">)</span>
@@ -18787,6 +18815,7 @@ https://github.com/iwpnd/folium-vectorgrid</p></td>
                 <span class="n">left_layer</span><span class="p">,</span>
                 <span class="n">return_client</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                 <span class="n">tile_format</span><span class="o">=</span><span class="s2">&quot;folium&quot;</span><span class="p">,</span>
+                <span class="n">client_args</span><span class="o">=</span><span class="n">client_args</span><span class="p">,</span>
                 <span class="o">**</span><span class="n">left_args</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -18826,6 +18855,7 @@ https://github.com/iwpnd/folium-vectorgrid</p></td>
                     <span class="n">right_layer</span><span class="p">,</span>
                     <span class="n">tile_format</span><span class="o">=</span><span class="s2">&quot;folium&quot;</span><span class="p">,</span>
                     <span class="n">return_client</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">client_args</span><span class="o">=</span><span class="n">client_args</span><span class="p">,</span>
                     <span class="o">**</span><span class="n">right_args</span><span class="p">,</span>
                 <span class="p">)</span>
                 <span class="n">bounds</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">image_bounds</span><span class="p">(</span><span class="n">right_client</span><span class="p">)</span>
@@ -18847,6 +18877,7 @@ https://github.com/iwpnd/folium-vectorgrid</p></td>
                 <span class="n">right_layer</span><span class="p">,</span>
                 <span class="n">return_client</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                 <span class="n">tile_format</span><span class="o">=</span><span class="s2">&quot;folium&quot;</span><span class="p">,</span>
+                <span class="n">client_args</span><span class="o">=</span><span class="n">client_args</span><span class="p">,</span>
                 <span class="o">**</span><span class="n">right_args</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
