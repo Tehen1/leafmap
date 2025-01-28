@@ -10645,6 +10645,7 @@ Map            (<span title="maplibre.ipywidget.MapWidget">MapWidget</span>)
         <span class="n">maxzoom</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">14</span><span class="p">,</span>
         <span class="n">sequence_lyr_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;sequence&quot;</span><span class="p">,</span>
         <span class="n">image_lyr_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span>
+        <span class="n">before_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">sequence_paint</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">image_paint</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">image_minzoom</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">17</span><span class="p">,</span>
@@ -10659,6 +10660,7 @@ Map            (<span title="maplibre.ipywidget.MapWidget">MapWidget</span>)
 <span class="sd">            maxzoom (int): Maximum zoom level for the Mapillary tiles. Defaults to 14.</span>
 <span class="sd">            sequence_lyr_name (str): Name of the sequence layer. Defaults to &quot;sequence&quot;.</span>
 <span class="sd">            image_lyr_name (str): Name of the image layer. Defaults to &quot;image&quot;.</span>
+<span class="sd">            before_id (str): The ID of an existing layer to insert the new layer before. Defaults to None.</span>
 <span class="sd">            sequence_paint (dict, optional): Paint properties for the sequence layer. Defaults to None.</span>
 <span class="sd">            image_paint (dict, optional): Paint properties for the image layer. Defaults to None.</span>
 <span class="sd">            image_minzoom (int): Minimum zoom level for the image layer. Defaults to 17.</span>
@@ -10719,9 +10721,8 @@ Map            (<span title="maplibre.ipywidget.MapWidget">MapWidget</span>)
             <span class="s2">&quot;minzoom&quot;</span><span class="p">:</span> <span class="n">image_minzoom</span><span class="p">,</span>
         <span class="p">}</span>
 
-        <span class="n">first_symbol_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_first_symbol_layer</span><span class="p">()[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="n">sequence_lyr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">sequence_lyr_name</span><span class="p">,</span> <span class="n">before_id</span><span class="o">=</span><span class="n">first_symbol_id</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="n">image_lyr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">image_lyr_name</span><span class="p">,</span> <span class="n">before_id</span><span class="o">=</span><span class="n">first_symbol_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="n">sequence_lyr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">sequence_lyr_name</span><span class="p">,</span> <span class="n">before_id</span><span class="o">=</span><span class="n">before_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="n">image_lyr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">image_lyr_name</span><span class="p">,</span> <span class="n">before_id</span><span class="o">=</span><span class="n">before_id</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">add_popup</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_popup</span><span class="p">(</span><span class="n">sequence_lyr_name</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_popup</span><span class="p">(</span><span class="n">image_lyr_name</span><span class="p">)</span>
@@ -10751,8 +10752,7 @@ Map            (<span title="maplibre.ipywidget.MapWidget">MapWidget</span>)
 <span class="sd">            radius (float): Search radius for Mapillary images. Defaults to 0.00005.</span>
 <span class="sd">            bbox (Optional[Union[str, List[float]]]): Bounding box for the search. Defaults to None.</span>
 <span class="sd">            image_id (Optional[str]): ID of the Mapillary image. Defaults to None.</span>
-<span class="sd">            style (str): Style of the Mapillary image. Defaults to &quot;classic&quot;.</span>
-<span class="sd">            width (int): Width of the iframe. Defaults to 560.</span>
+<span class="sd">            style (str): Style of the Mapillary image. Can be &quot;classic&quot;, &quot;photo&quot;, and &quot;split&quot;. Defaults to &quot;classic&quot;.</span>
 <span class="sd">            height (int): Height of the iframe. Defaults to 600.</span>
 <span class="sd">            frame_border (int): Frame border of the iframe. Defaults to 0.</span>
 <span class="sd">            link (bool): Whether to link the widget to map clicks. Defaults to True.</span>
@@ -10766,9 +10766,11 @@ Map            (<span title="maplibre.ipywidget.MapWidget">MapWidget</span>)
 
         <span class="k">if</span> <span class="n">image_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">lon</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">lat</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">lon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">[</span><span class="s2">&quot;lng&quot;</span><span class="p">]</span>
-                    <span class="n">lat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="s2">&quot;center&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">view_state</span><span class="p">:</span>
+                    <span class="n">center</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view_state</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">center</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">lon</span> <span class="o">=</span> <span class="n">center</span><span class="p">[</span><span class="s2">&quot;lng&quot;</span><span class="p">]</span>
+                        <span class="n">lat</span> <span class="o">=</span> <span class="n">center</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">]</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">lon</span> <span class="o">=</span> <span class="mi">0</span>
                     <span class="n">lat</span> <span class="o">=</span> <span class="mi">0</span>
@@ -10801,6 +10803,8 @@ Map            (<span title="maplibre.ipywidget.MapWidget">MapWidget</span>)
 <span class="s2">                    &lt;/iframe&gt;</span>
 <span class="s2">                    &quot;&quot;&quot;</span>
                     <span class="n">widget</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">content</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">widget</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;No Mapillary image found.&quot;</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">log_lng_lat</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="s2">&quot;clicked&quot;</span><span class="p">)</span>
 
@@ -14865,7 +14869,7 @@ To make the background half transparent, set this to "rgba(255, 255, 255, 0.5)".
 
 
 <h3 id="leafmap.maplibregl.Map.add_mapillary" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">add_mapillary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minzoom</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">maxzoom</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">sequence_lyr_name</span><span class="o">=</span><span class="s1">&#39;sequence&#39;</span><span class="p">,</span> <span class="n">image_lyr_name</span><span class="o">=</span><span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="n">sequence_paint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">image_paint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">image_minzoom</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">add_popup</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">access_token</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">add_mapillary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minzoom</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">maxzoom</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">sequence_lyr_name</span><span class="o">=</span><span class="s1">&#39;sequence&#39;</span><span class="p">,</span> <span class="n">image_lyr_name</span><span class="o">=</span><span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="n">before_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sequence_paint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">image_paint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">image_minzoom</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">add_popup</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">access_token</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 
 <a href="#leafmap.maplibregl.Map.add_mapillary" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -14908,6 +14912,12 @@ To make the background half transparent, set this to "rgba(255, 255, 255, 0.5)".
         <td><code>str</code></td>
         <td><p>Name of the image layer. Defaults to "image".</p></td>
         <td><code>&#39;image&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>before_id</code></td>
+        <td><code>str</code></td>
+        <td><p>The ID of an existing layer to insert the new layer before. Defaults to None.</p></td>
+        <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>sequence_paint</code></td>
@@ -14979,6 +14989,7 @@ To make the background half transparent, set this to "rgba(255, 255, 255, 0.5)".
     <span class="n">maxzoom</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">14</span><span class="p">,</span>
     <span class="n">sequence_lyr_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;sequence&quot;</span><span class="p">,</span>
     <span class="n">image_lyr_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span>
+    <span class="n">before_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">sequence_paint</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">image_paint</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">image_minzoom</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">17</span><span class="p">,</span>
@@ -14993,6 +15004,7 @@ To make the background half transparent, set this to "rgba(255, 255, 255, 0.5)".
 <span class="sd">        maxzoom (int): Maximum zoom level for the Mapillary tiles. Defaults to 14.</span>
 <span class="sd">        sequence_lyr_name (str): Name of the sequence layer. Defaults to &quot;sequence&quot;.</span>
 <span class="sd">        image_lyr_name (str): Name of the image layer. Defaults to &quot;image&quot;.</span>
+<span class="sd">        before_id (str): The ID of an existing layer to insert the new layer before. Defaults to None.</span>
 <span class="sd">        sequence_paint (dict, optional): Paint properties for the sequence layer. Defaults to None.</span>
 <span class="sd">        image_paint (dict, optional): Paint properties for the image layer. Defaults to None.</span>
 <span class="sd">        image_minzoom (int): Minimum zoom level for the image layer. Defaults to 17.</span>
@@ -15053,9 +15065,8 @@ To make the background half transparent, set this to "rgba(255, 255, 255, 0.5)".
         <span class="s2">&quot;minzoom&quot;</span><span class="p">:</span> <span class="n">image_minzoom</span><span class="p">,</span>
     <span class="p">}</span>
 
-    <span class="n">first_symbol_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_first_symbol_layer</span><span class="p">()[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="n">sequence_lyr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">sequence_lyr_name</span><span class="p">,</span> <span class="n">before_id</span><span class="o">=</span><span class="n">first_symbol_id</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="n">image_lyr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">image_lyr_name</span><span class="p">,</span> <span class="n">before_id</span><span class="o">=</span><span class="n">first_symbol_id</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="n">sequence_lyr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">sequence_lyr_name</span><span class="p">,</span> <span class="n">before_id</span><span class="o">=</span><span class="n">before_id</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="n">image_lyr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">image_lyr_name</span><span class="p">,</span> <span class="n">before_id</span><span class="o">=</span><span class="n">before_id</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">add_popup</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_popup</span><span class="p">(</span><span class="n">sequence_lyr_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_popup</span><span class="p">(</span><span class="n">image_lyr_name</span><span class="p">)</span>
@@ -17836,14 +17847,8 @@ See https://eodagmbh.github.io/py-maplibregl/api/layer/ for more information.</p
       <tr>
         <td><code>style</code></td>
         <td><code>str</code></td>
-        <td><p>Style of the Mapillary image. Defaults to "classic".</p></td>
+        <td><p>Style of the Mapillary image. Can be "classic", "photo", and "split". Defaults to "classic".</p></td>
         <td><code>&#39;classic&#39;</code></td>
-      </tr>
-      <tr>
-        <td><code>width</code></td>
-        <td><code>int</code></td>
-        <td><p>Width of the iframe. Defaults to 560.</p></td>
-        <td><code>560</code></td>
       </tr>
       <tr>
         <td><code>height</code></td>
@@ -17925,8 +17930,7 @@ See https://eodagmbh.github.io/py-maplibregl/api/layer/ for more information.</p
 <span class="sd">        radius (float): Search radius for Mapillary images. Defaults to 0.00005.</span>
 <span class="sd">        bbox (Optional[Union[str, List[float]]]): Bounding box for the search. Defaults to None.</span>
 <span class="sd">        image_id (Optional[str]): ID of the Mapillary image. Defaults to None.</span>
-<span class="sd">        style (str): Style of the Mapillary image. Defaults to &quot;classic&quot;.</span>
-<span class="sd">        width (int): Width of the iframe. Defaults to 560.</span>
+<span class="sd">        style (str): Style of the Mapillary image. Can be &quot;classic&quot;, &quot;photo&quot;, and &quot;split&quot;. Defaults to &quot;classic&quot;.</span>
 <span class="sd">        height (int): Height of the iframe. Defaults to 600.</span>
 <span class="sd">        frame_border (int): Frame border of the iframe. Defaults to 0.</span>
 <span class="sd">        link (bool): Whether to link the widget to map clicks. Defaults to True.</span>
@@ -17940,9 +17944,11 @@ See https://eodagmbh.github.io/py-maplibregl/api/layer/ for more information.</p
 
     <span class="k">if</span> <span class="n">image_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">lon</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">lat</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">lon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">[</span><span class="s2">&quot;lng&quot;</span><span class="p">]</span>
-                <span class="n">lat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s2">&quot;center&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">view_state</span><span class="p">:</span>
+                <span class="n">center</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view_state</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">center</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">lon</span> <span class="o">=</span> <span class="n">center</span><span class="p">[</span><span class="s2">&quot;lng&quot;</span><span class="p">]</span>
+                    <span class="n">lat</span> <span class="o">=</span> <span class="n">center</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">lon</span> <span class="o">=</span> <span class="mi">0</span>
                 <span class="n">lat</span> <span class="o">=</span> <span class="mi">0</span>
@@ -17975,6 +17981,8 @@ See https://eodagmbh.github.io/py-maplibregl/api/layer/ for more information.</p
 <span class="s2">                &lt;/iframe&gt;</span>
 <span class="s2">                &quot;&quot;&quot;</span>
                 <span class="n">widget</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">content</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">widget</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;No Mapillary image found.&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">log_lng_lat</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="s2">&quot;clicked&quot;</span><span class="p">)</span>
 
@@ -20618,7 +20626,7 @@ attempts to retrieve the API key using a predefined method. Defaults to None.</p
 
 
 <h2 id="leafmap.maplibregl.create_vector_data" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">create_vector_data</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time_format</span><span class="o">=</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">T%H%M%S&#39;</span><span class="p">,</span> <span class="n">column_widths</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">map_height</span><span class="o">=</span><span class="s1">&#39;600px&#39;</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename_prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">file_ext</span><span class="o">=</span><span class="s1">&#39;geojson&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">create_vector_data</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time_format</span><span class="o">=</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">T%H%M%S&#39;</span><span class="p">,</span> <span class="n">column_widths</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">map_height</span><span class="o">=</span><span class="s1">&#39;600px&#39;</span><span class="p">,</span> <span class="n">out_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename_prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">file_ext</span><span class="o">=</span><span class="s1">&#39;geojson&#39;</span><span class="p">,</span> <span class="n">add_mapillary</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;photo&#39;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">5e-05</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">420</span><span class="p">,</span> <span class="n">frame_border</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 <a href="#leafmap.maplibregl.create_vector_data" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -20698,6 +20706,46 @@ Defaults to "".</p></td>
         <td><code>&#39;geojson&#39;</code></td>
       </tr>
       <tr>
+        <td><code>add_mapillary</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to add a Mapillary image widget that displays the
+nearest image to the clicked point on the map. Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>style</code></td>
+        <td><code>str</code></td>
+        <td><p>The style of the Mapillary image widget. Can be "classic", "photo",
+or "split". Defaults to "photo".</p></td>
+        <td><code>&#39;photo&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>radius</code></td>
+        <td><code>float</code></td>
+        <td><p>The radius (in degrees) used to search for the nearest Mapillary
+image. Defaults to 0.00005 degrees.</p></td>
+        <td><code>5e-05</code></td>
+      </tr>
+      <tr>
+        <td><code>width</code></td>
+        <td><code>int</code></td>
+        <td><p>The width of the Mapillary image widget. Defaults to 300.</p></td>
+        <td><code>300</code></td>
+      </tr>
+      <tr>
+        <td><code>height</code></td>
+        <td><code>int</code></td>
+        <td><p>The height of the Mapillary image widget. Defaults to 420.</p></td>
+        <td><code>420</code></td>
+      </tr>
+      <tr>
+        <td><code>frame_border</code></td>
+        <td><code>int</code></td>
+        <td><p>The width of the frame border for the Mapillary image widget.
+Defaults to 0.</p></td>
+        <td><code>0</code></td>
+      </tr>
+      <tr>
         <td><code>**kwargs</code></td>
         <td><code>Any</code></td>
         <td><p>Additional keyword arguments that may be passed to the function.</p></td>
@@ -20740,6 +20788,12 @@ Defaults to "".</p></td>
     <span class="n">out_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">filename_prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="n">file_ext</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;geojson&quot;</span><span class="p">,</span>
+    <span class="n">add_mapillary</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;photo&quot;</span><span class="p">,</span>
+    <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.00005</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">420</span><span class="p">,</span>
+    <span class="n">frame_border</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a widget-based interface for creating and managing vector data on a map.</span>
@@ -20765,6 +20819,16 @@ Defaults to "".</p></td>
 <span class="sd">        filename_prefix (str, optional): A prefix to be added to the exported filename.</span>
 <span class="sd">            Defaults to &quot;&quot;.</span>
 <span class="sd">        file_ext (str, optional): The file extension for the exported file. Defaults to &quot;geojson&quot;.</span>
+<span class="sd">        add_mapillary (bool, optional): Whether to add a Mapillary image widget that displays the</span>
+<span class="sd">            nearest image to the clicked point on the map. Defaults to False.</span>
+<span class="sd">        style (str, optional): The style of the Mapillary image widget. Can be &quot;classic&quot;, &quot;photo&quot;,</span>
+<span class="sd">            or &quot;split&quot;. Defaults to &quot;photo&quot;.</span>
+<span class="sd">        radius (float, optional): The radius (in degrees) used to search for the nearest Mapillary</span>
+<span class="sd">            image. Defaults to 0.00005 degrees.</span>
+<span class="sd">        width (int, optional): The width of the Mapillary image widget. Defaults to 300.</span>
+<span class="sd">        height (int, optional): The height of the Mapillary image widget. Defaults to 420.</span>
+<span class="sd">        frame_border (int, optional): The width of the frame border for the Mapillary image widget.</span>
+<span class="sd">            Defaults to 0.</span>
 <span class="sd">        **kwargs (Any): Additional keyword arguments that may be passed to the function.</span>
 
 <span class="sd">    Returns:</span>
@@ -20806,6 +20870,8 @@ Defaults to "".</p></td>
     <span class="n">sidebar_widget</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">()</span>
 
     <span class="n">prop_widgets</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">VBox</span><span class="p">()</span>
+
+    <span class="n">image_widget</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HTML</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">properties</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -20864,6 +20930,26 @@ Defaults to "".</p></td>
 
     <span class="n">m</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">draw_change</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="s2">&quot;draw_features_selected&quot;</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">log_lng_lat</span><span class="p">(</span><span class="n">lng_lat</span><span class="p">):</span>
+        <span class="n">lon</span> <span class="o">=</span> <span class="n">lng_lat</span><span class="o">.</span><span class="n">new</span><span class="p">[</span><span class="s2">&quot;lng&quot;</span><span class="p">]</span>
+        <span class="n">lat</span> <span class="o">=</span> <span class="n">lng_lat</span><span class="o">.</span><span class="n">new</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">]</span>
+        <span class="n">image_id</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">search_mapillary_images</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_id</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            &lt;iframe</span>
+<span class="s2">                src=&quot;https://www.mapillary.com/embed?image_key=</span><span class="si">{</span><span class="n">image_id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&amp;style=</span><span class="si">{</span><span class="n">style</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">                height=&quot;</span><span class="si">{</span><span class="n">height</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">                width=&quot;</span><span class="si">{</span><span class="n">width</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">                frameborder=&quot;</span><span class="si">{</span><span class="n">frame_border</span><span class="si">}</span><span class="s2">&quot;&gt;</span>
+<span class="s2">            &lt;/iframe&gt;</span>
+<span class="s2">            &quot;&quot;&quot;</span>
+            <span class="n">image_widget</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">content</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">image_widget</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;No Mapillary image found.&quot;</span>
+
+    <span class="k">if</span> <span class="n">add_mapillary</span><span class="p">:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">log_lng_lat</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="s2">&quot;clicked&quot;</span><span class="p">)</span>
+
     <span class="n">button_layout</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s2">&quot;97px&quot;</span><span class="p">)</span>
     <span class="n">save</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Save&quot;</span><span class="p">,</span> <span class="n">button_style</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">button_layout</span>
@@ -20877,6 +20963,7 @@ Defaults to "".</p></td>
 
     <span class="k">def</span> <span class="nf">on_save_click</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
 
+        <span class="n">output</span><span class="o">.</span><span class="n">clear_output</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">draw_features_selected</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">feature_id</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">draw_features_selected</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">prop_widget</span> <span class="ow">in</span> <span class="n">prop_widgets</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
@@ -20928,6 +21015,7 @@ Defaults to "".</p></td>
         <span class="n">prop_widgets</span><span class="p">,</span>
         <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">save</span><span class="p">,</span> <span class="n">export</span><span class="p">,</span> <span class="n">reset</span><span class="p">]),</span>
         <span class="n">output</span><span class="p">,</span>
+        <span class="n">image_widget</span><span class="p">,</span>
     <span class="p">]</span>
 
     <span class="n">left_col_layout</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
