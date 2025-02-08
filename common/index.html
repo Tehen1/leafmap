@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.2">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.3">
     
     
       
@@ -36595,7 +36595,7 @@ will be used. Defaults to None.</p></td>
 
 
 <h2 id="leafmap.common.nasa_data_login" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">nasa_data_login</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">persist</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">nasa_data_login</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">persist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 <a href="#leafmap.common.nasa_data_login" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -36628,8 +36628,8 @@ will be used. Defaults to None.</p></td>
       <tr>
         <td><code>persist</code></td>
         <td><code>bool</code></td>
-        <td><p>Whether to persist credentials in a .netrc file. Defaults to False.</p></td>
-        <td><code>False</code></td>
+        <td><p>Whether to persist credentials in a .netrc file. Defaults to True.</p></td>
+        <td><code>True</code></td>
       </tr>
       <tr>
         <td><code>**kwargs</code></td>
@@ -36641,7 +36641,7 @@ will be used. Defaults to None.</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>leafmap/common.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">nasa_data_login</span><span class="p">(</span><span class="n">strategy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="n">persist</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">nasa_data_login</span><span class="p">(</span><span class="n">strategy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="n">persist</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Logs in to NASA Earthdata.</span>
 
 <span class="sd">    Args:</span>
@@ -36650,7 +36650,7 @@ will be used. Defaults to None.</p></td>
 <span class="sd">            &quot;interactive&quot;: enter username and password.</span>
 <span class="sd">            &quot;netrc&quot;: retrieve username and password from ~/.netrc.</span>
 <span class="sd">            &quot;environment&quot;: retrieve username and password from $EARTHDATA_USERNAME and $EARTHDATA_PASSWORD.</span>
-<span class="sd">        persist (bool, optional): Whether to persist credentials in a .netrc file. Defaults to False.</span>
+<span class="sd">        persist (bool, optional): Whether to persist credentials in a .netrc file. Defaults to True.</span>
 <span class="sd">        **kwargs: Additional keyword arguments for the earthaccess.login() function.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
@@ -50560,7 +50560,7 @@ meaningful property names.. Defaults to False.</p></td>
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.f13b1293.min.js"></script>
+      <script src="../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
         <script src="../js/timeago.min.js"></script>
       
