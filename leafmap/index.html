@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.3">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.5">
     
     
       
@@ -30,7 +30,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.d7758b05.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.8608ea7d.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -10193,7 +10193,7 @@ By default, the Map will add OpenStreetMap as the basemap.</p>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">):</span>
             <span class="n">source</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">array_to_image</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="o">**</span><span class="n">array_args</span><span class="p">)</span>
 
-        <span class="n">tile_layer</span><span class="p">,</span> <span class="n">tile_client</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_local_tile_layer</span><span class="p">(</span>
+        <span class="n">tile_layer</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_local_tile_layer</span><span class="p">(</span>
             <span class="n">source</span><span class="p">,</span>
             <span class="n">indexes</span><span class="o">=</span><span class="n">indexes</span><span class="p">,</span>
             <span class="n">colormap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span>
@@ -10204,10 +10204,11 @@ By default, the Map will add OpenStreetMap as the basemap.</p>
             <span class="n">attribution</span><span class="o">=</span><span class="n">attribution</span><span class="p">,</span>
             <span class="n">layer_name</span><span class="o">=</span><span class="n">layer_name</span><span class="p">,</span>
             <span class="n">client_args</span><span class="o">=</span><span class="n">client_args</span><span class="p">,</span>
-            <span class="n">return_client</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">return_client</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">tile_layer</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">visible</span>
+        <span class="n">tile_client</span> <span class="o">=</span> <span class="n">tile_layer</span><span class="o">.</span><span class="n">tile_server</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tile_layer</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">layer_index</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">zoom_to_layer</span><span class="p">:</span>
@@ -10246,6 +10247,7 @@ By default, the Map will add OpenStreetMap as the basemap.</p>
             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;LOCAL&quot;</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cog_layer_dict</span><span class="p">[</span><span class="n">layer_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">params</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tile_client</span> <span class="o">=</span> <span class="n">tile_client</span>
 
     <span class="n">add_local_tile</span> <span class="o">=</span> <span class="n">add_raster</span>
 
@@ -17183,7 +17185,7 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">):</span>
         <span class="n">source</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">array_to_image</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="o">**</span><span class="n">array_args</span><span class="p">)</span>
 
-    <span class="n">tile_layer</span><span class="p">,</span> <span class="n">tile_client</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_local_tile_layer</span><span class="p">(</span>
+    <span class="n">tile_layer</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_local_tile_layer</span><span class="p">(</span>
         <span class="n">source</span><span class="p">,</span>
         <span class="n">indexes</span><span class="o">=</span><span class="n">indexes</span><span class="p">,</span>
         <span class="n">colormap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span>
@@ -17194,10 +17196,11 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
         <span class="n">attribution</span><span class="o">=</span><span class="n">attribution</span><span class="p">,</span>
         <span class="n">layer_name</span><span class="o">=</span><span class="n">layer_name</span><span class="p">,</span>
         <span class="n">client_args</span><span class="o">=</span><span class="n">client_args</span><span class="p">,</span>
-        <span class="n">return_client</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">return_client</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">tile_layer</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">visible</span>
+    <span class="n">tile_client</span> <span class="o">=</span> <span class="n">tile_layer</span><span class="o">.</span><span class="n">tile_server</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tile_layer</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">layer_index</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">zoom_to_layer</span><span class="p">:</span>
@@ -17236,6 +17239,7 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
         <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;LOCAL&quot;</span><span class="p">,</span>
     <span class="p">}</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">cog_layer_dict</span><span class="p">[</span><span class="n">layer_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">tile_client</span> <span class="o">=</span> <span class="n">tile_client</span>
 </code></pre></div>
         </details>
     </div>
@@ -20755,7 +20759,7 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">):</span>
         <span class="n">source</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">array_to_image</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="o">**</span><span class="n">array_args</span><span class="p">)</span>
 
-    <span class="n">tile_layer</span><span class="p">,</span> <span class="n">tile_client</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_local_tile_layer</span><span class="p">(</span>
+    <span class="n">tile_layer</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_local_tile_layer</span><span class="p">(</span>
         <span class="n">source</span><span class="p">,</span>
         <span class="n">indexes</span><span class="o">=</span><span class="n">indexes</span><span class="p">,</span>
         <span class="n">colormap</span><span class="o">=</span><span class="n">colormap</span><span class="p">,</span>
@@ -20766,10 +20770,11 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
         <span class="n">attribution</span><span class="o">=</span><span class="n">attribution</span><span class="p">,</span>
         <span class="n">layer_name</span><span class="o">=</span><span class="n">layer_name</span><span class="p">,</span>
         <span class="n">client_args</span><span class="o">=</span><span class="n">client_args</span><span class="p">,</span>
-        <span class="n">return_client</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">return_client</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">tile_layer</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">visible</span>
+    <span class="n">tile_client</span> <span class="o">=</span> <span class="n">tile_layer</span><span class="o">.</span><span class="n">tile_server</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tile_layer</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">layer_index</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">zoom_to_layer</span><span class="p">:</span>
@@ -20808,6 +20813,7 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
         <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;LOCAL&quot;</span><span class="p">,</span>
     <span class="p">}</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">cog_layer_dict</span><span class="p">[</span><span class="n">layer_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">tile_client</span> <span class="o">=</span> <span class="n">tile_client</span>
 </code></pre></div>
         </details>
     </div>

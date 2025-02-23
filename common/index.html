@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.3">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.5">
     
     
       
@@ -30,7 +30,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.d7758b05.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.8608ea7d.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -27178,11 +27178,6 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
         <span class="k">else</span><span class="p">:</span>
             <span class="n">layer_name</span> <span class="o">=</span> <span class="s2">&quot;LocalTile_&quot;</span> <span class="o">+</span> <span class="n">random_string</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">DatasetReader</span><span class="p">):</span>
-        <span class="n">tile_client</span> <span class="o">=</span> <span class="n">TileClient</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="n">debug</span><span class="p">,</span> <span class="o">**</span><span class="n">client_args</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">tile_client</span> <span class="o">=</span> <span class="n">source</span>
-
     <span class="k">if</span> <span class="n">nodata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">nodata</span> <span class="o">=</span> <span class="n">get_api_key</span><span class="p">(</span><span class="s2">&quot;NODATA&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nodata</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -27196,7 +27191,7 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
         <span class="k">with</span> <span class="n">output</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">tile_format</span> <span class="o">==</span> <span class="s2">&quot;ipyleaflet&quot;</span><span class="p">:</span>
                 <span class="n">tile_layer</span> <span class="o">=</span> <span class="n">get_leaflet_tile_layer</span><span class="p">(</span>
-                    <span class="n">tile_client</span><span class="p">,</span>
+                    <span class="n">source</span><span class="p">,</span>
                     <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span>
                     <span class="n">debug</span><span class="o">=</span><span class="n">debug</span><span class="p">,</span>
                     <span class="n">indexes</span><span class="o">=</span><span class="n">indexes</span><span class="p">,</span>
@@ -27210,7 +27205,7 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
                 <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">tile_layer</span> <span class="o">=</span> <span class="n">get_folium_tile_layer</span><span class="p">(</span>
-                    <span class="n">tile_client</span><span class="p">,</span>
+                    <span class="n">source</span><span class="p">,</span>
                     <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span>
                     <span class="n">debug</span><span class="o">=</span><span class="n">debug</span><span class="p">,</span>
                     <span class="n">indexes</span><span class="o">=</span><span class="n">indexes</span><span class="p">,</span>
@@ -27226,7 +27221,7 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
     <span class="k">else</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">tile_format</span> <span class="o">==</span> <span class="s2">&quot;ipyleaflet&quot;</span><span class="p">:</span>
             <span class="n">tile_layer</span> <span class="o">=</span> <span class="n">get_leaflet_tile_layer</span><span class="p">(</span>
-                <span class="n">tile_client</span><span class="p">,</span>
+                <span class="n">source</span><span class="p">,</span>
                 <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span>
                 <span class="n">debug</span><span class="o">=</span><span class="n">debug</span><span class="p">,</span>
                 <span class="n">indexes</span><span class="o">=</span><span class="n">indexes</span><span class="p">,</span>
@@ -27240,7 +27235,7 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">tile_layer</span> <span class="o">=</span> <span class="n">get_folium_tile_layer</span><span class="p">(</span>
-                <span class="n">tile_client</span><span class="p">,</span>
+                <span class="n">source</span><span class="p">,</span>
                 <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span>
                 <span class="n">debug</span><span class="o">=</span><span class="n">debug</span><span class="p">,</span>
                 <span class="n">indexes</span><span class="o">=</span><span class="n">indexes</span><span class="p">,</span>
@@ -27255,22 +27250,9 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
             <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">return_client</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">tile_layer</span><span class="p">,</span> <span class="n">tile_client</span>
+        <span class="k">return</span> <span class="n">tile_layer</span><span class="p">,</span> <span class="n">tile_layer</span><span class="o">.</span><span class="n">tile_server</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">tile_layer</span>
-
-    <span class="c1"># center = tile_client.center()</span>
-    <span class="c1"># bounds = tile_client.bounds()  # [ymin, ymax, xmin, xmax]</span>
-    <span class="c1"># bounds = (bounds[2], bounds[0], bounds[3], bounds[1])  # [minx, miny, maxx, maxy]</span>
-
-    <span class="c1"># if get_center and get_bounds:</span>
-    <span class="c1">#     return tile_layer, center, bounds</span>
-    <span class="c1"># elif get_center:</span>
-    <span class="c1">#     return tile_layer, center</span>
-    <span class="c1"># elif get_bounds:</span>
-    <span class="c1">#     return tile_layer, bounds</span>
-    <span class="c1"># else:</span>
-    <span class="c1">#     return tile_layer</span>
 </code></pre></div>
         </details>
     </div>
