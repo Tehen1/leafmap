@@ -1071,6 +1071,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#leafmap.common.color_code_dataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      color_code_dataframe()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#leafmap.common.connect_points_as_line" class="md-nav__link">
     <span class="md-ellipsis">
       connect_points_as_line()
@@ -8447,6 +8456,28 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/105_vector_time_slider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    105 vector time slider
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8868,6 +8899,15 @@
   <a href="#leafmap.common.cog_validate" class="md-nav__link">
     <span class="md-ellipsis">
       cog_validate()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leafmap.common.color_code_dataframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      color_code_dataframe()
     </span>
   </a>
   
@@ -16417,6 +16457,318 @@ interval : boolean (default False)
         <span class="k">return</span> <span class="n">cog_info</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">cog_validate</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="leafmap.common.color_code_dataframe" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">color_code_dataframe</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">legend_dict</span><span class="p">)</span></code>
+
+
+<a href="#leafmap.common.color_code_dataframe" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Converts values in a dataframe to color codes based on a legend dictionary.</p>
+<p>This function takes a dataframe (or path to a dataframe) and a legend dictionary
+and returns a new dataframe with values replaced by their corresponding color codes.
+It supports both numeric range legends and categorical legends.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>data</code></td>
+        <td><code>Union[str, pandas.core.frame.DataFrame, gpd.GeoDataFrame]</code></td>
+        <td><p>Input data source, can be:
+- Path to a CSV file or geospatial file
+- pandas DataFrame
+- geopandas GeoDataFrame</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>legend_dict</code></td>
+        <td><code>Dict[str, str]</code></td>
+        <td><p>Dictionary mapping values to colors, can be:
+- Numeric ranges ("[ 100000, 200000]") mapped to color codes
+- Categorical values ("low", "medium") mapped to color codes
+- Can include a "Nodata" key for None/NaN values</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Union[pandas.core.frame.DataFrame, gpd.GeoDataFrame]</code></td>
+      <td><p>A new dataframe with values replaced by color codes, preserving the
+input data type (DataFrame or GeoDataFrame)</p></td>
+    </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>TypeError</code></td>
+        <td><p>If the input data type is not supported</p></td>
+      </tr>
+      <tr>
+        <td><code>ValueError</code></td>
+        <td><p>If the file format is not supported</p></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Examples:</strong></p>
+    <div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="c1"># Example with numeric ranges</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">range_legend</span> <span class="o">=</span> <span class="p">{</span>
+<span class="o">...</span>     <span class="s2">&quot;[ 0, 200000]&quot;</span><span class="p">:</span> <span class="s2">&quot;#daeaf6&quot;</span><span class="p">,</span>
+<span class="o">...</span>     <span class="s2">&quot;(200001, 400000]&quot;</span><span class="p">:</span> <span class="s2">&quot;#9ecae1&quot;</span><span class="p">,</span>
+<span class="o">...</span>     <span class="s2">&quot;Nodata&quot;</span><span class="p">:</span> <span class="s2">&quot;#f0f0f0&quot;</span>
+<span class="o">...</span> <span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">color_df</span> <span class="o">=</span> <span class="n">color_code_dataframe</span><span class="p">(</span><span class="s2">&quot;housing_data.csv&quot;</span><span class="p">,</span> <span class="n">range_legend</span><span class="p">)</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="c1"># Example with categorical values</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">cat_legend</span> <span class="o">=</span> <span class="p">{</span>
+<span class="o">...</span>     <span class="s2">&quot;low&quot;</span><span class="p">:</span> <span class="s2">&quot;#daeaf6&quot;</span><span class="p">,</span>
+<span class="o">...</span>     <span class="s2">&quot;medium&quot;</span><span class="p">:</span> <span class="s2">&quot;#9ecae1&quot;</span><span class="p">,</span>
+<span class="o">...</span>     <span class="s2">&quot;high&quot;</span><span class="p">:</span> <span class="s2">&quot;#2171b5&quot;</span><span class="p">,</span>
+<span class="o">...</span>     <span class="s2">&quot;Nodata&quot;</span><span class="p">:</span> <span class="s2">&quot;#f0f0f0&quot;</span>
+<span class="o">...</span> <span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Risk&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;low&quot;</span><span class="p">,</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span> <span class="s2">&quot;high&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]})</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">color_df</span> <span class="o">=</span> <span class="n">color_code_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cat_legend</span><span class="p">)</span>
+</code></pre></div>
+
+        <details class="quote">
+          <summary>Source code in <code>leafmap/common.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">color_code_dataframe</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="s2">&quot;gpd.GeoDataFrame&quot;</span><span class="p">],</span> <span class="n">legend_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="s2">&quot;gpd.GeoDataFrame&quot;</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts values in a dataframe to color codes based on a legend dictionary.</span>
+
+<span class="sd">    This function takes a dataframe (or path to a dataframe) and a legend dictionary</span>
+<span class="sd">    and returns a new dataframe with values replaced by their corresponding color codes.</span>
+<span class="sd">    It supports both numeric range legends and categorical legends.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data: Input data source, can be:</span>
+<span class="sd">            - Path to a CSV file or geospatial file</span>
+<span class="sd">            - pandas DataFrame</span>
+<span class="sd">            - geopandas GeoDataFrame</span>
+<span class="sd">        legend_dict: Dictionary mapping values to colors, can be:</span>
+<span class="sd">            - Numeric ranges (&quot;[ 100000, 200000]&quot;) mapped to color codes</span>
+<span class="sd">            - Categorical values (&quot;low&quot;, &quot;medium&quot;) mapped to color codes</span>
+<span class="sd">            - Can include a &quot;Nodata&quot; key for None/NaN values</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A new dataframe with values replaced by color codes, preserving the</span>
+<span class="sd">        input data type (DataFrame or GeoDataFrame)</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If the input data type is not supported</span>
+<span class="sd">        ValueError: If the file format is not supported</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; # Example with numeric ranges</span>
+<span class="sd">        &gt;&gt;&gt; range_legend = {</span>
+<span class="sd">        ...     &quot;[ 0, 200000]&quot;: &quot;#daeaf6&quot;,</span>
+<span class="sd">        ...     &quot;(200001, 400000]&quot;: &quot;#9ecae1&quot;,</span>
+<span class="sd">        ...     &quot;Nodata&quot;: &quot;#f0f0f0&quot;</span>
+<span class="sd">        ... }</span>
+<span class="sd">        &gt;&gt;&gt; color_df = color_code_dataframe(&quot;housing_data.csv&quot;, range_legend)</span>
+
+<span class="sd">        &gt;&gt;&gt; # Example with categorical values</span>
+<span class="sd">        &gt;&gt;&gt; cat_legend = {</span>
+<span class="sd">        ...     &quot;low&quot;: &quot;#daeaf6&quot;,</span>
+<span class="sd">        ...     &quot;medium&quot;: &quot;#9ecae1&quot;,</span>
+<span class="sd">        ...     &quot;high&quot;: &quot;#2171b5&quot;,</span>
+<span class="sd">        ...     &quot;Nodata&quot;: &quot;#f0f0f0&quot;</span>
+<span class="sd">        ... }</span>
+<span class="sd">        &gt;&gt;&gt; df = pd.DataFrame({&quot;Risk&quot;: [&quot;low&quot;, &quot;medium&quot;, &quot;high&quot;, None]})</span>
+<span class="sd">        &gt;&gt;&gt; color_df = color_code_dataframe(df, cat_legend)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">re</span>
+
+    <span class="c1"># Handle different input types</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="c1"># Input is a path to a file</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;.csv&quot;</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">path</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;.geojson&quot;</span><span class="p">,</span> <span class="s2">&quot;.shp&quot;</span><span class="p">]:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported file format: </span><span class="si">{</span><span class="n">path</span><span class="o">.</span><span class="n">suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="c1"># Input is already a pandas DataFrame</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">):</span>
+        <span class="c1"># Input is a GeoDataFrame</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Input must be a file path, pandas DataFrame, or GeoDataFrame&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Determine legend type: numeric ranges or categorical</span>
+    <span class="c1"># Exclude &quot;Nodata&quot; key from this check</span>
+    <span class="n">legend_without_nodata</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">k</span><span class="p">:</span> <span class="n">v</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">legend_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">&quot;Nodata&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;nodata&quot;</span>
+    <span class="p">}</span>
+    <span class="n">is_range_legend</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span>
+        <span class="s2">&quot;[&quot;</span> <span class="ow">in</span> <span class="n">key</span> <span class="ow">or</span> <span class="s2">&quot;(&quot;</span> <span class="ow">in</span> <span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">legend_without_nodata</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Get the &quot;Nodata&quot; color if provided</span>
+    <span class="n">nodata_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Nodata&quot;</span><span class="p">,</span> <span class="s2">&quot;nodata&quot;</span><span class="p">,</span> <span class="s2">&quot;NODATA&quot;</span><span class="p">,</span> <span class="s2">&quot;NoData&quot;</span><span class="p">]</span>
+    <span class="n">nodata_color</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">nodata_keys</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">legend_dict</span><span class="p">:</span>
+            <span class="n">nodata_color</span> <span class="o">=</span> <span class="n">legend_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">break</span>
+
+    <span class="c1"># Function to get color based on numeric value and range legend</span>
+    <span class="k">def</span> <span class="nf">get_color_for_numeric</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Maps a numeric value to a color based on the range legend.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            value: The value to map to a color</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The corresponding color code or None if no match is found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">or</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">nodata_color</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">nodata_color</span>
+
+        <span class="k">for</span> <span class="n">range_str</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">legend_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># Skip the Nodata entry</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">range_str</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">range_str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;nodata&quot;</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># Parse the range string like &quot;[ 182913, 357522]&quot; or &quot;( 357522, 415584]&quot;</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[\[\(]\s*(\d+),\s*(\d+)[\]\)]&quot;</span><span class="p">,</span> <span class="n">range_str</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">lower_bound</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+            <span class="n">upper_bound</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+            <span class="n">lower_inclusive</span> <span class="o">=</span> <span class="n">range_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;[&quot;</span><span class="p">)</span>
+            <span class="n">upper_inclusive</span> <span class="o">=</span> <span class="n">range_str</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;]&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Check if the value is within the range</span>
+            <span class="n">above_lower</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">value</span> <span class="o">&gt;=</span> <span class="n">lower_bound</span> <span class="k">if</span> <span class="n">lower_inclusive</span> <span class="k">else</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">lower_bound</span>
+            <span class="p">)</span>
+            <span class="n">below_upper</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">upper_bound</span> <span class="k">if</span> <span class="n">upper_inclusive</span> <span class="k">else</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">upper_bound</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">above_lower</span> <span class="ow">and</span> <span class="n">below_upper</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">color</span>
+
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># Function to get color based on categorical value</span>
+    <span class="k">def</span> <span class="nf">get_color_for_categorical</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Maps a categorical value to a color.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            value: The value to map to a color</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The corresponding color code or None if no match is found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">or</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">nodata_color</span>
+
+        <span class="c1"># Convert to string for comparison</span>
+        <span class="n">str_value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+        <span class="c1"># Try direct matching</span>
+        <span class="k">if</span> <span class="n">str_value</span> <span class="ow">in</span> <span class="n">legend_dict</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">legend_dict</span><span class="p">[</span><span class="n">str_value</span><span class="p">]</span>
+
+        <span class="c1"># Try case-insensitive matching</span>
+        <span class="k">for</span> <span class="n">cat</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">legend_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cat</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">cat</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;nodata&quot;</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cat</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">cat</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">str_value</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">color</span>
+
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># Select appropriate color mapping function</span>
+    <span class="n">get_color</span> <span class="o">=</span> <span class="n">get_color_for_numeric</span> <span class="k">if</span> <span class="n">is_range_legend</span> <span class="k">else</span> <span class="n">get_color_for_categorical</span>
+
+    <span class="c1"># Identify columns to process</span>
+    <span class="k">if</span> <span class="n">is_range_legend</span><span class="p">:</span>
+        <span class="c1"># For numeric ranges, look for numeric columns and date-formatted columns</span>
+        <span class="n">columns_to_process</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="c1"># Check if column name matches date pattern</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\d</span><span class="si">{4}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+                <span class="n">columns_to_process</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># Check if column contains numbers</span>
+            <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">is_numeric_dtype</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]):</span>
+                <span class="c1"># Exclude columns that are likely IDs or categorical codes</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span>
+                    <span class="n">col</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+                    <span class="ow">or</span> <span class="s2">&quot;code&quot;</span> <span class="ow">in</span> <span class="n">col</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                    <span class="ow">or</span> <span class="s2">&quot;fips&quot;</span> <span class="ow">in</span> <span class="n">col</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                <span class="p">):</span>
+                    <span class="n">columns_to_process</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># For categorical legend, look for object or category columns</span>
+        <span class="n">columns_to_process</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">is_object_dtype</span><span class="p">(</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+            <span class="p">)</span> <span class="ow">or</span> <span class="n">pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">is_categorical_dtype</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]):</span>
+                <span class="n">columns_to_process</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+            <span class="c1"># Also check if numeric columns might contain discrete categories</span>
+            <span class="k">elif</span> <span class="n">pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">is_numeric_dtype</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">])</span> <span class="ow">and</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="n">columns_to_process</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+
+    <span class="c1"># Replace each value with its corresponding color</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns_to_process</span><span class="p">:</span>
+        <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">get_color</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span>
 </code></pre></div>
         </details>
     </div>

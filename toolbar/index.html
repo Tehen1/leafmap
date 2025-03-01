@@ -1264,6 +1264,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#leafmap.toolbar.time_slider_for_gdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      time_slider_for_gdf()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#leafmap.toolbar.tool_header_template" class="md-nav__link">
     <span class="md-ellipsis">
       tool_header_template()
@@ -5885,6 +5894,28 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/105_vector_time_slider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    105 vector time slider
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6147,6 +6178,15 @@
   <a href="#leafmap.toolbar.time_slider" class="md-nav__link">
     <span class="md-ellipsis">
       time_slider()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leafmap.toolbar.time_slider_for_gdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      time_slider_for_gdf()
     </span>
   </a>
   
@@ -14220,6 +14260,294 @@
     <span class="n">slider_ctrl</span> <span class="o">=</span> <span class="n">ipyleaflet</span><span class="o">.</span><span class="n">WidgetControl</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="n">slider_widget</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span>
     <span class="n">m</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">slider_ctrl</span><span class="p">)</span>
     <span class="n">m</span><span class="o">.</span><span class="n">slider_ctrl</span> <span class="o">=</span> <span class="n">slider_ctrl</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="leafmap.toolbar.time_slider_for_gdf" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">time_slider_for_gdf</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">gdf</span><span class="p">,</span> <span class="n">time_columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time_interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="s1">&#39;bottomright&#39;</span><span class="p">,</span> <span class="n">slider_length</span><span class="o">=</span><span class="s1">&#39;150px&#39;</span><span class="p">,</span> <span class="n">zoom_to_layer</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+
+<a href="#leafmap.toolbar.time_slider_for_gdf" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Adds a time slider to the map for visualizing vector time series data.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>m</code></td>
+        <td></td>
+        <td><p>The leafmap.Map object</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>gdf</code></td>
+        <td><code>gpd.GeoDataFrame</code></td>
+        <td><p>The GeoDataFrame with time series data stored as color codes in columns</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>time_columns</code></td>
+        <td><code>list</code></td>
+        <td><p>List of column names containing the time series data (e.g., dates)</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>labels</code></td>
+        <td><code>list</code></td>
+        <td><p>The list of labels to be used for the time series. Defaults to time_columns.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>time_interval</code></td>
+        <td><code>int</code></td>
+        <td><p>Time interval in seconds. Defaults to 1.</p></td>
+        <td><code>1</code></td>
+      </tr>
+      <tr>
+        <td><code>position</code></td>
+        <td><code>str</code></td>
+        <td><p>Position to place the time slider. Defaults to "bottomright".</p></td>
+        <td><code>&#39;bottomright&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>slider_length</code></td>
+        <td><code>str</code></td>
+        <td><p>Length of the time slider. Defaults to "150px".</p></td>
+        <td><code>&#39;150px&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>zoom_to_layer</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to zoom to the extent of the layer. Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>style</code></td>
+        <td><code>dict</code></td>
+        <td><p>Base style for the GeoJSON layer. Defaults to None.</p></td>
+        <td><code>None</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>leafmap/toolbar.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">time_slider_for_gdf</span><span class="p">(</span>
+    <span class="n">m</span><span class="p">,</span>
+    <span class="n">gdf</span><span class="p">:</span> <span class="s2">&quot;gpd.GeoDataFrame&quot;</span><span class="p">,</span>
+    <span class="n">time_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">time_interval</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">position</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;bottomright&quot;</span><span class="p">,</span>
+    <span class="n">slider_length</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;150px&quot;</span><span class="p">,</span>
+    <span class="n">zoom_to_layer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">style</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds a time slider to the map for visualizing vector time series data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        m: The leafmap.Map object</span>
+<span class="sd">        gdf: The GeoDataFrame with time series data stored as color codes in columns</span>
+<span class="sd">        time_columns (list, optional): List of column names containing the time series data (e.g., dates)</span>
+<span class="sd">        labels (list, optional): The list of labels to be used for the time series. Defaults to time_columns.</span>
+<span class="sd">        time_interval (int, optional): Time interval in seconds. Defaults to 1.</span>
+<span class="sd">        position (str, optional): Position to place the time slider. Defaults to &quot;bottomright&quot;.</span>
+<span class="sd">        slider_length (str, optional): Length of the time slider. Defaults to &quot;150px&quot;.</span>
+<span class="sd">        zoom_to_layer (bool, optional): Whether to zoom to the extent of the layer. Defaults to False.</span>
+<span class="sd">        style (dict, optional): Base style for the GeoJSON layer. Defaults to None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">time</span>
+    <span class="kn">import</span> <span class="nn">threading</span>
+    <span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+    <span class="kn">from</span> <span class="nn">ipyleaflet</span> <span class="kn">import</span> <span class="n">WidgetControl</span>
+
+    <span class="c1"># Set default style if not provided</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">style</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;opacity&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;fillOpacity&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="c1"># Extract time columns if not provided</span>
+    <span class="k">if</span> <span class="n">time_columns</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Assuming time columns are in YYYY-MM-DD format</span>
+        <span class="n">time_columns</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">col</span>
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">gdf</span><span class="o">.</span><span class="n">columns</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="n">col</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span>
+            <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">))</span> <span class="o">==</span> <span class="mi">3</span>
+        <span class="p">]</span>
+        <span class="n">time_columns</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>  <span class="c1"># Sort chronologically</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_columns</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No time columns found in the GeoDataFrame&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Use time_columns as labels if not provided</span>
+    <span class="k">if</span> <span class="n">labels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">time_columns</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_columns</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The length of labels is not equal to that of time_columns&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Add the GeoJSON layer to the map with the first time column</span>
+    <span class="n">initial_style_callback</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">feat</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;fillColor&quot;</span><span class="p">:</span> <span class="n">feat</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">][</span><span class="n">time_columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Check if we already have a GeoJSON layer</span>
+    <span class="n">geojson_layer</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="s2">&quot;style_callback&quot;</span><span class="p">):</span>
+            <span class="n">geojson_layer</span> <span class="o">=</span> <span class="n">layer</span>
+            <span class="k">break</span>
+
+    <span class="c1"># If no GeoJSON layer found, add one</span>
+    <span class="k">if</span> <span class="n">geojson_layer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s2">&quot;add_gdf&quot;</span><span class="p">):</span>  <span class="c1"># For leafmap</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">add_gdf</span><span class="p">(</span>
+                <span class="n">gdf</span><span class="p">,</span>
+                <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span>
+                <span class="n">style_callback</span><span class="o">=</span><span class="n">initial_style_callback</span><span class="p">,</span>
+                <span class="n">zoom_to_layer</span><span class="o">=</span><span class="n">zoom_to_layer</span><span class="p">,</span>
+                <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Get the added layer (usually the last one added)</span>
+            <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">layers</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="s2">&quot;style_callback&quot;</span><span class="p">):</span>
+                    <span class="n">geojson_layer</span> <span class="o">=</span> <span class="n">layer</span>
+                    <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Map object must support add_gdf method&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Create slider widget</span>
+    <span class="n">slider</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span>
+        <span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="nb">max</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">time_columns</span><span class="p">),</span>
+        <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">readout</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">continuous_update</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">slider_length</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Create label widget</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
+        <span class="n">value</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">padding</span><span class="o">=</span><span class="s2">&quot;0px 5px 0px 5px&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Create control buttons</span>
+    <span class="n">play_btn</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+        <span class="n">icon</span><span class="o">=</span><span class="s2">&quot;play&quot;</span><span class="p">,</span>
+        <span class="n">tooltip</span><span class="o">=</span><span class="s2">&quot;Play the time slider&quot;</span><span class="p">,</span>
+        <span class="n">button_style</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="p">,</span>
+        <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s2">&quot;32px&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="n">pause_btn</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+        <span class="n">icon</span><span class="o">=</span><span class="s2">&quot;pause&quot;</span><span class="p">,</span>
+        <span class="n">tooltip</span><span class="o">=</span><span class="s2">&quot;Pause the time slider&quot;</span><span class="p">,</span>
+        <span class="n">button_style</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="p">,</span>
+        <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s2">&quot;32px&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="n">close_btn</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+        <span class="n">icon</span><span class="o">=</span><span class="s2">&quot;times&quot;</span><span class="p">,</span>
+        <span class="n">tooltip</span><span class="o">=</span><span class="s2">&quot;Close the time slider&quot;</span><span class="p">,</span>
+        <span class="n">button_style</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="p">,</span>
+        <span class="n">layout</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s2">&quot;32px&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="n">play_chk</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Checkbox</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Assemble widget</span>
+    <span class="n">slider_widget</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">label</span><span class="p">,</span> <span class="n">slider</span><span class="p">,</span> <span class="n">play_btn</span><span class="p">,</span> <span class="n">pause_btn</span><span class="p">,</span> <span class="n">close_btn</span><span class="p">])</span>
+
+    <span class="c1"># Play button click handler</span>
+    <span class="k">def</span> <span class="nf">play_click</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
+        <span class="n">play_chk</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="n">slider</span><span class="p">):</span>
+            <span class="k">while</span> <span class="n">play_chk</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">slider</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_columns</span><span class="p">):</span>
+                    <span class="n">slider</span><span class="o">.</span><span class="n">value</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">slider</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">time_interval</span><span class="p">)</span>
+
+        <span class="n">thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">work</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">slider</span><span class="p">,))</span>
+        <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="c1"># Pause button click handler</span>
+    <span class="k">def</span> <span class="nf">pause_click</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
+        <span class="n">play_chk</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">play_btn</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">play_click</span><span class="p">)</span>
+    <span class="n">pause_btn</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">pause_click</span><span class="p">)</span>
+
+    <span class="c1"># Slider change handler</span>
+    <span class="k">def</span> <span class="nf">slider_changed</span><span class="p">(</span><span class="n">change</span><span class="p">):</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">default_style</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cursor&quot;</span><span class="p">:</span> <span class="s2">&quot;wait&quot;</span><span class="p">}</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">slider</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">current_column</span> <span class="o">=</span> <span class="n">time_columns</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+        <span class="c1"># Update the style_callback to use the current time column</span>
+        <span class="k">if</span> <span class="n">geojson_layer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">geojson_layer</span><span class="o">.</span><span class="n">style_callback</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">feat</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;fillColor&quot;</span><span class="p">:</span> <span class="n">feat</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">][</span><span class="n">current_column</span><span class="p">]</span>
+            <span class="p">}</span>
+            <span class="c1"># geojson_layer.redraw()</span>
+
+        <span class="n">m</span><span class="o">.</span><span class="n">default_style</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cursor&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">}</span>
+
+    <span class="n">slider</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">slider_changed</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Close button click handler</span>
+    <span class="k">def</span> <span class="nf">close_click</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
+        <span class="n">play_chk</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s2">&quot;toolbar_reset&quot;</span><span class="p">):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">toolbar_reset</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="nb">hasattr</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s2">&quot;slider_ctrl&quot;</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="n">m</span><span class="o">.</span><span class="n">slider_ctrl</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="ow">and</span> <span class="n">m</span><span class="o">.</span><span class="n">slider_ctrl</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">controls</span>
+        <span class="p">):</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">remove_control</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">slider_ctrl</span><span class="p">)</span>
+
+        <span class="n">slider_widget</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">close_btn</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">close_click</span><span class="p">)</span>
+
+    <span class="c1"># Add the control to the map</span>
+    <span class="n">slider_ctrl</span> <span class="o">=</span> <span class="n">WidgetControl</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="n">slider_widget</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">add_control</span><span class="p">(</span><span class="n">slider_ctrl</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">slider_ctrl</span> <span class="o">=</span> <span class="n">slider_ctrl</span>  <span class="c1"># Store reference to the control</span>
+
+    <span class="k">return</span> <span class="n">geojson_layer</span>
 </code></pre></div>
         </details>
     </div>
